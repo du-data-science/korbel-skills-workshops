@@ -1,0 +1,82 @@
+---
+title: "Countries at Risk of Violent Protest"
+author: "YOUR NAME HERE"
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+# Some options that you can ignore for the moment
+knitr::opts_chunk$set(echo = F, eval = F, include = F, error = F, message = F, cache = T)
+```
+
+<!--
+This is another type of comment. This will not print when you hit the "Knit" button above. Try that now. RStudio should produce a (mostly blank) pdf. Didn't install a TeX distribution? Well, try knitting to html by using the dropdown arrow next to the "Knit" button.  
+-->
+
+# The Link Between Economic Performance and Violent Protests
+What I write here will print, though. Use this space to write a few sentences (no more than one paragraph) on why you think poor economic performance will lead to violent protests. I'm not asking you to wholeheartedly believe that there is an actually, but explain why this _might_ be the case. (Also, notice that "might" in the line before is italisized.) Bonus points (no, no real bonus points but I'll be impressed) if you incorporate some of the assumptions discussed in Nachmias and Nachmias.  
+
+# Selection Process
+
+<!-- I've included some code below that will not print but will load dataset from the exercise into your current R environment (It should still be there, but just in case). Run the code by either copying it or pressing the play button in the top-right of the code chunk.   
+
+You may want to refer to the exercise if you had trouble with arrange/sort. 
+-->
+
+```{r load-data, eval = FALSE}
+require(tidyverse)
+require(WDI)
+
+# Notice that this is now just data since 2015 (there is not 2017 information on the world bank right now so this is the most recent)
+originalData <- WDI(country="all", indicator=c("NY.GDP.PCAP.KD", "FP.CPI.TOTL.ZG"), start=2015, end=2016, extra = T)
+
+originalData <- originalData %>% 
+  select(country, year, gdpPerCapita = NY.GDP.PCAP.KD, cpi = FP.CPI.TOTL.ZG, region)
+
+countries <- originalData %>% 
+  filter(region!="Aggregates") 
+
+countries <- countries %>% 
+  group_by(country) %>% 
+  arrange(year) %>% 
+  mutate(changeInGdp = gdpPerCapita - lag(gdpPerCapita)) %>% 
+  ungroup() %>% 
+  arrange(country, year)
+```
+
+
+Where are you getting your information? What time period does it cover? What variables are you going to use and how do they correspond to "economic performance?" Answer these questions. Provide enough detail that someone can understand (if you choose CPI, for example, explain both the concept and the measurement) but remember that this should all fit on one page.  
+
+```{r sort, eval = FALSE}
+myList <- countries %>% 
+  filter(year==2016) %>% 
+  select(country, chooseAVaraible) %>% 
+  arrange(chooseAVaraible -- keep in mind that you may need to change the ordering)
+```
+
+## List of At-Risk States
+1.
+2.
+3.
+4.
+5.
+
+
+<!-- 
+Or you could print a table directly from your code using this codechunk. Change the option "eval" from FALSE to TRUE for all the code chunks in this document. You'll need to change "include" to "TRUE" for all code chunks in this document. Consider why that's necessary.
+-->
+
+```{r, eval = FALSE, include = FALSE}
+print(myList[1:5,])
+
+# OR for a prettier table
+
+require(knitr) # may have to install
+atRisk <- myList[1:5,]
+colnames(atRisk) <- c("Country", "YOUR VARIABLE NAME")
+kable(atRisk, caption = "At Risk Countries According to VAR NAME")
+```
+
