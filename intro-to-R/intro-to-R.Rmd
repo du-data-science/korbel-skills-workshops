@@ -1,0 +1,90 @@
+---
+title: 'Introduction to Data Science Using R'
+subtitle: "Korbel Skills Workshop"
+author: 
+- Instructor -- Jason Renn
+- Facilitators -- Names
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
+output:
+  html_document:
+    collapsed: yes
+    highlight: textmate
+    number_sections: no
+    smooth_scroll: yes
+    theme: spacelab
+    toc: yes
+    toc_depth: 2
+    toc_float: yes
+    fontsize: 16pt
+---
+
+--------------
+<br>
+
+```{r setup, include=FALSE, cache=F}
+knitr::opts_chunk$set(cache = F, # Things run faster... the second time. Reset if changes do not compile
+                      include = T, eval = T, echo = T, # By default, code chunks are invisible but still execute 
+                      message = F, warning = F, # If it's broke, we don't want to see it
+                      dev = 'png', fig.path = "images/") # Save images in a specific directory
+
+## Packages. Add packrat features here
+require(RefManageR)
+require(knitr)
+```
+
+<!--
+Author: Jason Renn
+Note the GPL-3.0 license. Reusable with permission, notification, and attribution.  
+
+Use the html comment codes for hidden messages and notes. This will still appear in source.  
+
+Note that LaTeX math mode, (i.e. $x$) doesn't always work in html. Be careful.  
+
+To add: 
+- Packrat integration
+- Custom .css with Korbel/University of Denver colors and images
+- Authorship and license within each file? 
+- Figure out another name for "facilitators." Essentially a support/TA role within the workshop. 
+-->
+
+# Required Software
+
+## What is Data Science? 
+
+## Why R? 
+
+
+--------------
+<br>
+
+# Exploring RStudio
+
+
+## Installing and Requiring Packages
+
+
+## Importing Datasets
+
+### R Data format
+
+### Comma Delimited
+
+### Other Formats (stata, spss, excel)
+
+
+# A Preview of Extended Functionality 
+
+## Descriptive Statistics
+
+## Data Management
+
+## Visualization 
+
+## Statistical Analysis
+
+
+# Hands-On: Loading NAVCO/IFs Dyadic
+
+
+
+
