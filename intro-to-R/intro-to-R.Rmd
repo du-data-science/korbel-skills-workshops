@@ -18,11 +18,26 @@ output:
     fontsize: 16pt
 ---
 
---------------
+<!--
+Author: Jason Renn
+Note the GPL-3.0 license. Reusable with permission, notification, and attribution.  
+
+Use the html comment codes for hidden messages and notes. This will still appear in source. Note that LaTeX math mode, (i.e. $x$) doesn't always work in html. Be careful.  
+
+To add: 
+- Packrat integration
+- Custom .css with Korbel/University of Denver colors and images
+- Authorship and license within each file? 
+- Figure out another name for "facilitators." Essentially a support/TA role within the workshop. 
+-->
+
+
+--------------  
+
 <br>
 
-```{r setup, include=FALSE, cache=F}
-knitr::opts_chunk$set(cache = F, # Things run faster... the second time. Reset if changes do not compile
+```{r setup, include=F, cache=F}
+knitr::opts_chunk$set(cache = T, # Things run faster... the second time. Reset if changes do not compile
                       include = T, eval = T, echo = T, # By default, code chunks are invisible but still execute 
                       message = F, warning = F, # If it's broke, we don't want to see it
                       dev = 'png', fig.path = "images/") # Save images in a specific directory
@@ -32,36 +47,36 @@ require(RefManageR)
 require(knitr)
 ```
 
-<!--
-Author: Jason Renn
-Note the GPL-3.0 license. Reusable with permission, notification, and attribution.  
 
-Use the html comment codes for hidden messages and notes. This will still appear in source.  
-
-Note that LaTeX math mode, (i.e. $x$) doesn't always work in html. Be careful.  
-
-To add: 
-- Packrat integration
-- Custom .css with Korbel/University of Denver colors and images
-- Authorship and license within each file? 
-- Figure out another name for "facilitators." Essentially a support/TA role within the workshop. 
--->
 
 # Required Software
+Welcome to the first Korbel Skills Workshop. These materials are available online at the following url:  
+
+> https://du-data-science.github.io/korbel-skills-workshops/ (http://bit.ly/2hI2bYk)
+
+You will need to install the following software for this workshop. All of these materials are free and open-source. Please install each (in order) in the next several minutes as we begin with a brief introduction of Data science and the R statistical programming language.  
 
 ## What is Data Science? 
 
-## Why R? 
+## Why R?  
 
 
---------------
-<br>
+--------------  
+
 
 # Exploring RStudio
 
+## The Workspace 
+
+### Console
+
+### Environment
+
+### File Explorer
+
+### Scripts and Markdown
 
 ## Installing and Requiring Packages
-
 
 ## Importing Datasets
 
@@ -72,7 +87,44 @@ To add:
 ### Other Formats (stata, spss, excel)
 
 
-# A Preview of Extended Functionality 
+--------------
+
+![caption](filepath)
+
+
+# Accessing Data
+
+## Data Structures
+
+## Vectors
+
+## Data Frames
+
+## Basic Operations 
+
+
+--------------  
+
+
+
+# Hands-On: NAVCO/IFs
+
+## Load Data
+
+## Extract Observation
+
+## Summary Statistics
+
+## Generate New Value
+
+## Plot
+
+
+--------------  
+
+
+
+# Additional Skills 
 
 ## Descriptive Statistics
 
@@ -81,10 +133,3 @@ To add:
 ## Visualization 
 
 ## Statistical Analysis
-
-
-# Hands-On: Loading NAVCO/IFs Dyadic
-
-
-
-

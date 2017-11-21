@@ -1,0 +1,257 @@
+---
+title: "Week 1: Scientific Research and Inquiry (notes)"
+author: "Jason Renn"
+output: 
+  beamer_presentation: 
+    colortheme: beaver
+    fonttheme: professionalfonts
+    highlight: espresso
+    slide_level: 2
+    theme: Szeged
+    fig_caption: false
+classoption: aspectratio=169
+header-includes:
+   - \setbeameroption{hide notes}
+   - \setbeamertemplate{note page}{\pagecolor{yellow!10}\insertnote}\usepackage{palatino}
+   - \definecolor{links}{HTML}{2A1B81}
+   - \hypersetup{colorlinks,linkcolor=,urlcolor=links}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, cache = T, include = F, message = F, error = F)
+require(knitr)
+
+```
+
+<!-- 
+options for notes are "show" or "hide"
+-->
+
+# Introduction
+
+## Welcome
+![](https://www.bramblewoodpac.com/wp-content/uploads/2016/09/welcome-sign.jpg)
+\note[item]{Who am I? PhD D from UIUC. Study civil conflict and democratization, but many interests -- mostly data-driven. I mostly do academic research, but also worked for Army Corps of Engineers and with many people who do policy work.}
+
+\note[item]{Why 'Defense Security Methods?' You're in this series of methods courses to prepare you to do that too. You're here in this class because it will help you get a job! By the end of the course, you'll be able to ask good questions and have a plan to answer these questions. The next course in the sequence will introduce you to more, but don't underestimate the usefulness of just understanding the research process.}
+
+## Course
+- Course Website: [https://canvas.du.edu](https://canvas.du.edu)
+\note[item]{Most materials will be located here. Make sure that you can log in and that you check it regularly}
+
+- Syllabus (Check announcements for updates!)
+\note[item]{Is mostly complete, but I plan on changing some of the readings as we move forward to fit the interests of the class. This contains a SCHEDULE of readings and due dates.}
+
+- Course Materials
+\note[item]{There is one book. Bring your laptop. Don't get distracted. I can help with some tech support issues.}
+
+- Class Schedule
+
+## Grades
+
+```{r fig.height=2.7, fig.width=9, eval=T, echo=F, include=T, align = "center"}
+include_graphics("http://phdcomics.com/comics/archive/phd012014s.gif")
+```
+
+\note[item]{Grades aren't as important as learning the materials, but I'm sure you all care about them. More details about each component are in the syllabus}
+
+\note[item]{Participation means more than attendance. Attendance is a given (though if you must miss, I understand. Let me know). In a class that is relatively small with so many activities, I will be able to evaluate "honest effort"}
+
+\note[item]{You'll notice that the exercises are the largest component of your grade. This isn't a mistake. You'll have to learn by doing in this class, and that means new things too -- as many of you have not had computer science of stats before. That said, you work on these exercises together and I seek to reward genuine effort. Don't leave things blank, but if you make a mistake or time is a problem, I will understand and tailor the future exercises to fit the class's needs a little better.}
+
+-----------
+
+__Components__  
+
+- Participation (20%)
+- In-Class Exercises (30%)
+- Final Exam (10%)
+- Final Paper (40%)
+
+\note[item]{There is a final paper. We'll discuss is a lot, but first realize that you'll write it in sections and turn those sections in throughout the quarter. This will help you manage the ultimate project deadline as well as give you feedback and opportunities for revision. No last-minute papers in this class.}
+
+\note[item]{You'll also present your paper and turn in a final version, but by that point it should be in good shape. If you have questions about the paper, please ask me -- both here and in office hours/meetings. The quarter is short!}
+
+\note[item]{There will also be an exam. I don't really like exams, but it's important that I am able to evaluate your individual work (separate from the group exercises) when you are under a greater time constraint (in contrast to the paper). I haven't decided on all the details, but you'll be receiving a take home assignment that will be due during finals. Make sure that you're able to do this on your own.}
+
+# Readings
+
+## Required Text
+![](http://prod-cat-files.macmillan.cloud/MediaResources/Jackets/high_res/9781429233002.jpg)
+
+\note{There is only one required text. Make sure you get the 8th edition. You'll be using this in DSQA too, so don't sell it over Thanksgiving.}
+
+## Supplemental Materials
+
+![](https://static.attn.com/sites/default/files/college%20textbooks.png)
+
+-------------
+
+- Free/open textbooks (See the Syllabus for links)
+- [Articles and other materials through the library](https://library.du.edu/)
+- Other resources, see the course website!
+
+\note[item]{The main text will be supplemented with a number of other materials. But you don't have to buy anything else.}
+
+\note[item]{There is a section on the syllabus with links to the supplemental textbooks.}
+
+\note[item]{I'll do my best to also include articles on the course website, but you should know how to use google scholar and the university's library website/proxy to access things like journal articles, news sources, etc.}
+
+
+------------
+
+__Break: Take 2__
+
+![](http://3.bp.blogspot.com/-Eg7DUXlfAg0/UgRkc11Li2I/AAAAAAAAGQc/dpMjbgDcu_U/s1600/keep-calm-it-s-break-time.png)
+
+\note{Yes, we're here for almost three hours (even for the first class). Take two minutes to not think about the class.}
+
+# What is Science 
+
+## Foundations
+- Science as a methodology 
+\note[item]{We can set aside the more philosophical discussion (ontology, epistemology, knowlege) for a while. Let's just start with this: can anyone describe the scientific method for us? Do apply it is your life/work?}
+
+- What is the goal of science?
+\note[item]{You'll want to know if something is true. If X causes Y, and here you'll use the scientific method. But of course there are other things too, like rhetorical style, public opinion, etc. that help pursuade. The scientific aspect, though, is supposed to be more rigorous.}
+
+- How does science provide _justification_ for claims? 
+\note[item]{Rational or empirical. We'll think these through more in class, but we need evidence that is systematic in some way. What kind of evidence isn't systematic?}
+
+## Assumptions (see NN pg 6-7)
+1. Nature is orderly 
+2. We can know nature 
+3. All natural phenomena have natural causes
+4. Nothing is self-evident 
+5. Knowledge is based on experience
+6. knowledge is superior to ignorance
+
+\note[item]{What's the implication? Patterns emerge! Deterministic, probably not for social science?}
+\note[item]{What's the implication? We can observe through our senses (empiricists). We're limited by what we can't observe or measure. A big problem in social science}
+\note[item]{We can tie observations together because we assume that patterns hold. Empirical regularity is a term that you might run across. What is that? Is that the same as cause and effect? Maybe not?}
+\note[item]{Skeptisism is important. Why? Are there downsides? (Turns out we can't be pure skeptics. We are talking about assumptions here, by the way.)}
+\note[item]{The other points sound a little hoity toity to me. I guess they get at the need to refine our findings and develop.}
+
+## Questions about Science
+- What's the difference between explaining, predicting, and understanding?
+- Are social phenomena the same as natural phenomena? (Verstehen)
+- What are the norms of science? What does "normal" science look like compared to "revolutionary" science? 
+
+## Key Terms (Chapter 2)
+- Concept (p. 26)
+- Operationalization/Measurement (p. 27)
+- Theories
+- Model
+
+\note[item]{Quick exercise - think of a way to operationalize the concept of 'conflict.' (What is it? What level of analysis did you implicitly apply?)}
+
+\note[item]{Simplify discription of theory to an explaination of how things relate. It produces observable predictions -- hypotheses. If this is true, then we see this. What is theory not? It's not a contrast to practice.}
+
+\note[item]{A model is a simplification of reality useful for explaination and prediction. We use them to test theories but they are always wrong. We'll deal a lot with statistical models where we judge models based on predictive power, typically.}
+
+\note[item]{You'll see this in practice in the exercise.} 
+
+
+------------
+
+__Break: Take 5__  
+
+When you come back, you'll be doing a group activity. Yay!?  
+
+![](https://static1.squarespace.com/static/5395c414e4b048e4728507da/t/54f4a838e4b03e3d11f71a22/1425319992237/06-take-5.png)
+
+
+
+  
+  
+# Group Exercise
+
+## Group Assignments
+
+\note{Will have to move people around manually for late adds.}
+
+\note{You'll have the remainder of the time to complete this exercise. Finish early and you're free to leave, but that doesn't mean you should. I talk about it in the activity, but ask questions, help each other, help other groups. I'll be walking around and can help up on the screen if there's a particular issue that's troubling. When you're done, submit the pdf that you produce.}
+
+\note{I'll assign groups for a while.}
+
+```{r, include = T, eval = T, warning = F, message = F}
+section1 <- c("Zayd A.", "Jake, A.", "Will B.", "Katherine C.", "Meg C.", "Joseph D.", "Rebecca D.", "Miguel H.", "Ariel H.", "Scott L.", "Katie L.", "Christian M.", "Scott M.", "Juan M.", "Berk O.", "Evan S.", "David S.", "Ariel S.", "Sebastian S.", "Matt W.", "Thomas W.", "Blake W.", "Robert W.", "Michael Y.")
+
+section2 <- c("Kathryn A.", "TC B.", "Jesse C.", "Peter C.", "Joseph D.", "Grant F.", "Troy H.", "James R.", "Don I.", "Kevin J.", "Nancy L.", "Austin M.", "Jovan M.", "Adam P.", "Stephen P.", "Katie S.", "Brittany van S.", "Crystol W.", "Dusty W.")
+
+
+makeGroups <- function(classList, groupSize){
+require(dplyr)
+require(knitr)
+# test <- matrix(section2, 4,4)
+# which(!c(1:15) %in% c(1:10))
+# which(!section2 %in% test)
+# all(section2 %in% test)
+
+randList <- sample(classList, length(classList))
+numGroups = length(classList)%/%groupSize
+groupTable <- matrix(randList,groupSize,numGroups)
+colnames(groupTable) <- c(1:numGroups)
+
+kable(groupTable)
+# if(length(classList)%%groupSize>0){
+#   print("Free Agents: ")
+#   cat(cat(test[(groupSize*numGroups):length(randList)], sep=", "))
+# }
+
+}
+```
+
+```{r,  include = T, eval = T, warning = F, message = F}
+set.seed(1)
+makeGroups(section1, 3)
+```
+
+
+## Group Assignments
+
+```{r, include = T, eval = T, warning = F, message = F}
+set.seed(1)
+makeGroups(section2, 3)
+```
+
+```{r, include = F, eval = F}
+# Current Attendance
+length(section2)
+
+# Randomize
+require(tidyverse)
+section2 <- as.data.frame(section2)
+section2 %>% sample_n(size = 5) %>% slice(1)
+
+rep(c(1:3),5)[1:15]
+
+install.packages("randomizeR")
+require(randomizeR)
+
+size=4
+groups <- gl(size,length(section2)%/%size)
+table(groups)
+
+rep(1:5)
+
+Z <- complete_(N = 19, num_arms = 5)
+table(Z)
+
+split(section2, sample(1:5, 100, replace = TRUE))
+
+table(sample(1:4, length(section2), replace = FALSE))
+
+groups <- gl(3,length(section2)%/%3)
+table(groups)
+
+split(section2, groups)
+set.seed(10)
+sample(section2)
+
+matrix(sample(section2), 4, 5)
+
+split(section2 )
+
+```
+
