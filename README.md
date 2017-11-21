@@ -1,2 +1,6 @@
-# korbel-skills-workshops
-Data science workshops and tutorials for Korbel students and faculty. 
+## Placeholder (Put mission statement here)
+
+
+## Schedule
+
+- [Introduction to Data Science in R](https://htmlpreview.github.io/?https://github.com/du-data-science/korbel-skills-workshops/blob/master/intro-to-R/intro-to-R.html)
