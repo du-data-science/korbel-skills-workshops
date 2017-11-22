@@ -38,7 +38,7 @@ To add:
 
 ```{r setup, include=F, cache=F}
 knitr::opts_chunk$set(cache = T, # Things run faster... the second time. Reset if changes do not compile
-                      include = T, eval = T, echo = T, # By default, code chunks are invisible but still execute 
+                      include = T, eval = T, echo = T, # By default, code chunks are visible, executes, output hidden
                       message = F, warning = F, # If it's broke, we don't want to see it
                       dev = 'png', fig.path = "images/", fig.width = 6, fig.height = 4, fig.align = 'center') # image and figure options
 
@@ -82,28 +82,100 @@ These workshops will only serve as an introduction to these tools, primarily the
 
 Consider the example of the 2012 Presidential Campaign.^[See (https://venturebeat.com/2013/05/19/obama-campaigns-chief-data-guy-gets-candid-about-the-data-strategy-that-won-the-election/) and (https://www.technologyreview.com/s/508836/how-obama-used-big-data-to-rally-voters-part-1/) for more details.] The Obama campaign used data scientists, to collect data and create statistical models to help register voters and craft outreach. [Rayid Ghani](http://www.rayidghani.com/), a fellow at the University of Chicago and the Chief Scientist for the 2012 Obama for America campaign, led the effort. One of skills that they sought? R.  
 
-[](/intro-to-R/images/r-advert-obama.png)
+<br>
 
-Will `R` always be around? Probably not. But it will prepare you to learn new languages as well. If you go further with data science, you will probably have to learn some other software. This is a mindset as much as it is formal training. Try this out in this workshop.  
+![](/Users/duurenn/Dropbox/teaching/winter-2018/korbel-skills-workshops/intro-to-R/images/r-advert-obama.png)
+
+<br>
+
+Will `R` always be around? Probably not. But it will prepare you to learn new languages as well. If you go further with data science, you will probably have to learn some other software. This is a mindset as much as it is formal training.  
 
 --------------  
 
-
 # Exploring RStudio
+RStudio is an Integrated Development Environment (IDE) that makes R a lot easier to use. There is a lot of functionality built into RStudio, including dynamic documents, version control, and linkages to cloud-based resources. We won't cover those today. For now, open up RStudio to make sure that the install worked.    
 
-## The Workspace 
+## The Interface 
+You should see something that looks like the image below:  
+
+![](https://upload.wikimedia.org/wikipedia/commons/4/4d/Rstudio.png)
+
+By default there is space for four panels, though the top-left panel may be closed the first time that you open RStudio.^[This is similar to Stata's layout.] Don't worry. We'll cover that in a moment.  
 
 ### Console
+The first place that you should look is the console. This is where you enter code and commands into R for your computer to process. In the old days, we'd have to open up a terminal/command prompt.  
+
+Try to enter the following code into the __Console__ panel to make sure that RStudio can correctly locate `R`.  
+
+```{r, eval = F}
+print("hello world")
+```
 
 ### Environment
+In the top-right corner is a panel that has multiple tabs. Select the __Environment__ tab if it isn't already selected. Note that it should currently say "Environment is empty."  
+
+One of the virtures of R is that it can load several objects into memory. Other software (Stata in particular) only loads one. While this helps keep the enviroment clear, it makes data management pretty difficult. Let's make a few objects in R and save them. Make sure to pay attention to the __Environment__ tab to see how it changes with the following commands. Type or copy/paste the following lines into the __Console__.  
+
+```{r}
+# This is a comment. 
+# Any line in R that begins with a "#" will not execute. For example: 
+# print("hello")
+# Use comments to document code. I will use it provide a few notes. From here on out, don't worry about the commented lines.  
+
+# To assign a value, use the "<-". You can also use an "=" but that is typically reserved. We'll see why later.  
+# Don't worry. You can lie about this. 
+yourAge <- 28
+favoriteColor <- "blue"
+x = 1
+y = 3
+```
+
+What happened to the environment? You can now call any of the variables that you just created by referring to the by name. 
+
+```{r, eval = F}
+x
+y
+x+y
+```
+Note that R is case sensitive. Typing the following will give you an error.  
+
+```{r, eval = F}
+yourage
+favoritecolor
+```
+
+You also can't save a variable with a space in the name -- at least you shouldn't.  
+
+```{r, eval = F}
+# This won't work
+your age <- 28
+```
 
 ### File Explorer
+In the bottom-right, you'll see the __Files__ panel. You can access files here -- if it is a file that R can load as a dataset, then you'll also get a prompt with options. You could easily never touch the __Files__ panel, instead using the __Console__ or options within the "File -> " menu to access things, but it can be useful. There are usually three or four ways to do something in 'R'. Do what works for you.  
 
-### Scripts and Markdown
+### Scripts, Markdown, Datasets
+The final panel contains txt files that you can edit and will also display datasets. Most often, this space will have either a `.R` (script) or `.Rmd` (RMarkdown) file where you can save your commands. Similar to a Stata `.do` file, this allows you to keep a record of everything you've done in case you have to redo something. Unlike the console output, you can easily save these files. The console output will get cleared from time to time. We won't create a script or markdown file today, but they are useful.  
 
 ## Installing and Requiring Packages
+One of the best aspects of `R` is that people continue to develop additional features and expand the functionality. Any user can download and attach these software packages to their own installation of `R`. Since this is all open-source, there aren't any warranties or support, so the challenge with these packages is keeping them up-to-date and reading through some rather obtuse documentation.  
+
+We're going to install a few packages right now that will allow us to load data in many file formats into 'R'.  
+
+```{r, eval = F}
+# During the installation process, R may ask you to create a personal library or restart R. This should be fine. 
+# You can install one package at a time
+install.packages("haven")
+
+# Or multiple
+install.packages("readxl", "foreign")
+```
+
+With these packages installed, you can now use commands that are not part of "base `R`." 
+
 
 ## Importing Datasets
+
 
 ### R Data format
 
