@@ -8,21 +8,21 @@ date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output:
   html_document:
     collapsed: yes
+    df_print: kable
+    fontsize: 20pt
     highlight: textmate
-    number_sections: no
     smooth_scroll: yes
     theme: spacelab
     toc: yes
     toc_depth: 2
     toc_float: yes
-    fontsize: 16pt
 ---
 
 <!--
 Author: Jason Renn
 Note the GPL-3.0 license. Reusable with permission, notification, and attribution.  
 
-Use the html comment codes for hidden messages and notes. This will still appear in source. Note that LaTeX math mode, (i.e. $x$) doesn't always work in html. Be careful.  
+Use the html comment codes for hidden messages and notes. This will still appear in source.
 
 To add: 
 - Packrat integration
@@ -40,7 +40,7 @@ To add:
 knitr::opts_chunk$set(cache = T, # Things run faster... the second time. Reset if changes do not compile
                       include = T, eval = T, echo = T, # By default, code chunks are invisible but still execute 
                       message = F, warning = F, # If it's broke, we don't want to see it
-                      dev = 'png', fig.path = "images/") # Save images in a specific directory
+                      dev = 'png', fig.path = "images/", fig.width = 6, fig.height = 4, fig.align = 'center') # image and figure options
 
 ## Packages. Add packrat features here
 require(RefManageR)
@@ -50,16 +50,41 @@ require(knitr)
 
 
 # Required Software
-Welcome to the first Korbel Skills Workshop. These materials are available online at the following url:  
+Welcome to the first Korbel Skills Workshop^[All workshop materials are covered under a GPL 3.0 license. If you'd like more experience with the tools covered here, consult the instructors.]. These materials are available online at the following url:  
 
 > https://du-data-science.github.io/korbel-skills-workshops/ (http://bit.ly/2hI2bYk)
 
-You will need to install the following software for this workshop. All of these materials are free and open-source. Please install each (in order) in the next several minutes as we begin with a brief introduction of Data science and the R statistical programming language.  
+You will need to install the following software for this workshop. Please install both (in order) in the next several minutes as we begin with a brief introduction of Data Science and the R statistical programming language.^[If you would like to setup your computer for future workshops, consider installing a TeX Distribution, either [MiKTeX for Windows](https://miktex.org/download) or [MacTeX for Mac](https://www.tug.org/mactex/). If you're on a Linux, some distributions include [TeX Live](https://www.tug.org/texlive/quickinstall.html) but you should make sure to update. You can also install [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) for version control and create an account on [github](https://github.com/join). If you use your du.edu email address, you'll qualify for a free student account.]  
+
+- [R Statistical Programming Language](https://cran.r-project.org/) 
+- [RStudio IDE](https://www.rstudio.com/products/rstudio/download/#download) 
 
 ## What is Data Science? 
 
-## Why R?  
+<!-- These images are licensed for free use under a creative commons license. I forget if educational use is the same as "non-profit." We should check if these are presented to any outside audiences. -->
 
+![](https://upload.wikimedia.org/wikipedia/commons/4/44/DataScienceDisciplines.png)
+
+
+Beyond its status as a buzzword^[See [Davenport and Patil (2012)](https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century)], data science is simply a combination of a number of quantitatively-oriented skills, including statistics, mathematics, and computer science. There are many other terms and specific skills, but these are the core.  
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Data_Science_storytelling.jpg/522px-Data_Science_storytelling.jpg)
+
+I would add that on top of the computer/quantitative skills, you will also have to learn how to write about and discuss data science techniques if you plan on using them in your career. Even for those of you that do not plan on persuing research, you will find yourself in a professional setting where you will have to engage with data. Why learn these data science skills? They should complement your knowledge about the content (domain expertise) and rhetorical skills _to help make you heard_.  
+
+These workshops will only serve as an introduction to these tools, primarily the software. If you want more training in these skills, know that it will require work. We will discuss more advanced uses of these tools and additional training at the end of the workshop.  
+
+## Why `R`?  
+
+![](http://www.xqinformatics.com/xq/images/logo/logo%20r%20small.png)
+
+`R` is a computer programming language. It is open-source, popular, and strikes a balance between having more flexibility than many other software packages (e.g. Stata, SPSS) and being a little easier to use (e.g. Python, SAS, S). If you encounter data science in your careers, it will probably be in `R`.^[Also note that because R is open-source, it is free. A commercial license for SPSS can run [as high as $8,000](https://www.ibm.com/products/spss-statistics/pricing) with similarly high costs for [Stata as well](https://www.stata.com/order/new/gov/volume-licenses/dl/)]  
+
+Consider the example of the 2012 Presidential Campaign.^[See (https://venturebeat.com/2013/05/19/obama-campaigns-chief-data-guy-gets-candid-about-the-data-strategy-that-won-the-election/) and (https://www.technologyreview.com/s/508836/how-obama-used-big-data-to-rally-voters-part-1/) for more details.] The Obama campaign used data scientists, to collect data and create statistical models to help register voters and craft outreach. [Rayid Ghani](http://www.rayidghani.com/), a fellow at the University of Chicago and the Chief Scientist for the 2012 Obama for America campaign, led the effort. One of skills that they sought? R.  
+
+[](/intro-to-R/images/r-advert-obama.png)
+
+Will `R` always be around? Probably not. But it will prepare you to learn new languages as well. If you go further with data science, you will probably have to learn some other software. This is a mindset as much as it is formal training. Try this out in this workshop.  
 
 --------------  
 
@@ -88,8 +113,6 @@ You will need to install the following software for this workshop. All of these 
 
 
 --------------
-
-![caption](filepath)
 
 
 # Accessing Data
