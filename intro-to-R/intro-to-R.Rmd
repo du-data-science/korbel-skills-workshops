@@ -80,7 +80,7 @@ These workshops will only serve as an introduction to these tools, primarily the
 
 `R` is a computer programming language. It is open-source, popular, and strikes a balance between having more flexibility than many other software packages (e.g. Stata, SPSS) and being a little easier to use (e.g. Python, SAS, S). If you encounter data science in your careers, it will probably be in `R`.^[Also note that because R is open-source, it is free. A commercial license for SPSS can run [as high as $8,000](https://www.ibm.com/products/spss-statistics/pricing) with similarly high costs for [Stata as well](https://www.stata.com/order/new/gov/volume-licenses/dl/)]  
 
-Consider the example of the 2012 Presidential Campaign.^[See (https://venturebeat.com/2013/05/19/obama-campaigns-chief-data-guy-gets-candid-about-the-data-strategy-that-won-the-election/) and (https://www.technologyreview.com/s/508836/how-obama-used-big-data-to-rally-voters-part-1/) for more details.] The Obama campaign used data scientists, to collect data and create statistical models to help register voters and craft outreach. [Rayid Ghani](http://www.rayidghani.com/), a fellow at the University of Chicago and the Chief Scientist for the 2012 Obama for America campaign, led the effort. One of skills that they sought? R.  
+Consider the example of the 2012 Presidential Campaign.^[See (https://venturebeat.com/2013/05/19/obama-campaigns-chief-data-guy-gets-candid-about-the-data-strategy-that-won-the-election/) and (https://www.technologyreview.com/s/508836/how-obama-used-big-data-to-rally-voters-part-1/) for more details.] The Obama campaign used data scientists, to collect data and create statistical models to help register voters and their craft outreach strategy. [Rayid Ghani](http://www.rayidghani.com/), a fellow at the University of Chicago and the Chief Scientist for the 2012 Obama for America campaign, led the effort. One of tools that he and his team used? `R`.  
 
 <br>
 
@@ -93,44 +93,45 @@ Will `R` always be around? Probably not. But it will prepare you to learn new la
 --------------  
 
 # Exploring RStudio
-RStudio is an Integrated Development Environment (IDE) that makes R a lot easier to use. There is a lot of functionality built into RStudio, including dynamic documents, version control, and linkages to cloud-based resources. We won't cover those today. For now, open up RStudio to make sure that the install worked.    
+RStudio is an Integrated Development Environment (IDE) that makes R much easier to use than in days past. There is a lot of functionality built into RStudio, including dynamic documents, version control, and linkages to cloud-based resources. We won't cover those today -- just the basics. For now, open up RStudio to make sure that the install worked.    
 
 ## The Interface 
 You should see something that looks like the image below:  
 
 ![](https://upload.wikimedia.org/wikipedia/commons/4/4d/Rstudio.png)
 
-By default there is space for four panels, though the top-left panel may be closed the first time that you open RStudio.^[This is similar to Stata's layout.] Don't worry. We'll cover that in a moment.  
+By default there is space for four panels, though the top-left panel may be minimized the first time that you open RStudio.^[This is similar to Stata's layout.] Don't worry. We'll cover that in a moment.  
 
 ### Console
 The first place that you should look is the console. This is where you enter code and commands into R for your computer to process. In the old days, we'd have to open up a terminal/command prompt.  
 
-Try to enter the following code into the __Console__ panel to make sure that RStudio can correctly locate `R`.  
+Try to enter the following code into the __Console__ panel to make sure that RStudio can correctly locate `R`. If successful, you the console should print out a friendly little message.  
 
-```{r, eval = F}
+```{r, eval = F, echo = T}
 print("hello world")
 ```
 
 ### Environment
 In the top-right corner is a panel that has multiple tabs. Select the __Environment__ tab if it isn't already selected. Note that it should currently say "Environment is empty."  
 
-One of the virtures of R is that it can load several objects into memory. Other software (Stata in particular) only loads one. While this helps keep the enviroment clear, it makes data management pretty difficult. Let's make a few objects in R and save them. Make sure to pay attention to the __Environment__ tab to see how it changes with the following commands. Type or copy/paste the following lines into the __Console__.  
+One of the virtures of R is that it can load several objects into memory. Other software (Stata in particular) only loads one. While this helps keep the enviroment clean, it can make data management tasks pretty difficult. Let's make a few objects in R and save them. Make sure to pay attention to the __Environment__ tab to see how it changes with the following commands. Type or copy/paste the following lines into the __Console__.  
 
 ```{r}
 # This is a comment. 
 # Any line in R that begins with a "#" will not execute. For example: 
 # print("hello")
-# Use comments to document code. I will use it provide a few notes. From here on out, don't worry about the commented lines.  
+# Use comments to document code. I will use it provide additional explanation for code-related topics. 
+# Don't worry about typing of copying commented lines. Do read them. 
 
 # To assign a value, use the "<-". You can also use an "=" but that is typically reserved. We'll see why later.  
-# Don't worry. You can lie about this. 
+# You can lie about your age if you want.  
 yourAge <- 28
 favoriteColor <- "blue"
 x = 1
 y = 3
 ```
 
-What happened to the environment? You can now call any of the variables that you just created by referring to the by name. 
+What happened to the environment? You can now call any of the variables that you just created by referring to the by name. Try thte following:  
 
 ```{r, eval = F}
 x
@@ -152,15 +153,15 @@ your age <- 28
 ```
 
 ### File Explorer
-In the bottom-right, you'll see the __Files__ panel. You can access files here -- if it is a file that R can load as a dataset, then you'll also get a prompt with options. You could easily never touch the __Files__ panel, instead using the __Console__ or options within the "File -> " menu to access things, but it can be useful. There are usually three or four ways to do something in 'R'. Do what works for you.  
+In the bottom-right, you'll see the __Files__ panel. You can access files saved on your computer here and if it is a file that R can load as a dataset, then you'll also get a prompt with options. You could easily never touch the __Files__ panel, instead using the __Console__ or options within the "File -> " menu to access things, but it can be useful. There are usually three or four ways to do something in 'R'. Do what works for you.  
 
 ### Scripts, Markdown, Datasets
-The final panel contains txt files that you can edit and will also display datasets. Most often, this space will have either a `.R` (script) or `.Rmd` (RMarkdown) file where you can save your commands. Similar to a Stata `.do` file, this allows you to keep a record of everything you've done in case you have to redo something. Unlike the console output, you can easily save these files. The console output will get cleared from time to time. We won't create a script or markdown file today, but they are useful.  
+The final panel contains text files that you can edit and will also display datasets. Most often, this space will have either a `.R` (script) or `.Rmd` (RMarkdown) file where you can save commands and output. Similar to a Stata `.do` file, this allows you to keep a record of everything you've done in case you have to redo something. Unlike the console output, you can easily save these files. The console output will get cleared from time to time. We won't create a script or markdown file today, but they are useful.  
 
 ## Installing and Requiring Packages
 One of the best aspects of `R` is that people continue to develop additional features and expand the functionality. Any user can download and attach these software packages to their own installation of `R`. Since this is all open-source, there aren't any warranties or support, so the challenge with these packages is keeping them up-to-date and reading through some rather obtuse documentation.  
 
-We're going to install a few packages right now that will allow us to load data in many file formats into 'R'.  
+We're going to install a few packages right now that will allow us to load data into 'R' from several file formats.  
 
 ```{r, eval = F}
 # During the installation process, R may ask you to create a personal library or restart R. This should be fine. 
@@ -171,52 +172,157 @@ install.packages("haven")
 install.packages("readxl", "foreign")
 ```
 
-With these packages installed, you can now use commands that are not part of "base `R`." 
-
+With these packages installed, you can now use commands that are not part of "base `R`.  
 
 ## Importing Datasets
+One of the first skills that you'll have to learn when dealing with data is opening it. Many file formats are proprietary and used to require that you own the software (or a conversion tool) in order to view and use the data. The packages that you downloaded in the previous section will allow you to open these files within `R`. You can even use RStudio to view the files and export them to easier to access formats.  
 
+To begin, load the downloaded packages into memory using the `require()` command. Note that loading a package is a distinct step that you have to do after you download (`install.packages()`) a package.  
+
+```{r}
+require(haven)
+
+# Similarly, you can use the library() command
+library(readxl)
+```
+
+For this example, we will use a dataset provided by the World Bank. This is a small dataset with only a little more than one thousand observations. You could use a spreadsheet program like Excel to open up and edit the data. For larger files, with tens-of-thousands, or even millions of observations are much easier to work with in `R` or similar programs.  
+
+You can find these data files online at:  
+
+> (website -- link to data file)
+
+```{r, eval = F, include = F}
+require(WDI)
+require(tidyverse)
+
+worldBank <- WDI(country = "all", 
+                 indicator = c("EN.ATM.GHGT.KT.CE", "SP.DYN.IMRT.IN", "VC.IHR.PSRC.P5", "MS.MIL.XPND.GD.ZS", "DT.ODA.ODAT.PC.ZS", "NY.GDP.PCAP.CD"),
+    start = 2011, end = 2015, extra = T, cache = NULL)
+
+worldBank <- worldBank %>% 
+  filter(region!="Aggregates") %>% 
+  select(country, year, iso3c, greenhouseGasEmissions = EN.ATM.GHGT.KT.CE, infantMortality = SP.DYN.IMRT.IN, homicideRate = VC.IHR.PSRC.P5, militaryExpendituresPerGPD = MS.MIL.XPND.GD.ZS, netODAperCapita = DT.ODA.ODAT.PC.ZS, gdpPerCapita = NY.GDP.PCAP.CD) %>% 
+  arrange(country, year)
+
+require(haven)
+setwd("~/Dropbox/teaching/winter-2018/korbel-skills-workshops/intro-to-R/data")
+# Rdata file
+save(worldBank, file = "worldBank.Rdata")
+# csv or acsii 
+write.csv(worldBank, file="worldBank.csv")
+# stata
+write_dta(worldBank, path="worldBank.dta")
+# excel
+# did this manually
+# spss
+write_sav(worldBank, path = "worldBank.sav")
+```
 
 ### R Data format
+If you find a file with a `.Rdata` or `.rds` file extension, you can load it simply by finding it in the __Files__ panel, clicking it, and choosing "yes" when prompted to load the data file into memory.  
+
+You can also find the file on your computer using the "File -> "Open File" dialogue menu. Notice that both of these methods simply pass a command to the console which looks like this:  
+
+```{r, eval = F}
+# Your specific file path will differ
+load("~/user/documents/file/worldBank.Rdata")
+```
+
+If you know the file path and name of the dataset, you can load it directly in the __Console__.  
 
 ### Comma Delimited
+A more common file type is a comma delimited or `.csv` file. These are text files with breaks between values (ascii and .txt files are similar). As the name suggests, a `.csv` has commas separating invidual values. This type of file is easy to open in a spreadsheet program, as long as it is not too large to load into your computer's memory.  
+
+You can import a `.csv` file into `R` in a similar way, by either finding it in thne __Files__ pane or using the menu. Note that as this is not the native file format for `R` you will be "importing" the dataset and not simply "opening" it.  
+
+![](https://support.rstudio.com/hc/en-us/article_attachments/206277868/data-import-menu.png)
+
+When you choose the import option, you'll see a preview of the data as well as a number of additional options that you can choose from to make sure that the data load properly. Notice again that RStudio is actually just passing more commands to the console once you press "import."  
+
+![](https://support.rstudio.com/hc/en-us/article_attachments/206277598/Screen_Shot_2016-04-08_at_2.47.27_PM.png)
+
+The actual command to import a `.csv` file should look something like this:  
+
+```{r, eval = F}
+# Again, your file path may look different. 
+# If you didn't run the require(haven) command earlier, this won't work. 
+# read_csv() is a command within haven, so if it isn't loaded the computer won't recognize it.
+worldBank <- read_csv("worldBank.csv")
+```
 
 ### Other Formats (stata, spss, excel)
+I have included the `worldBank` data in a few other file formats. The process to import them is similar. I've put the command line/console-based approach here. See if you can get one of the other file formats to load using any method that you please.
+
+```{r, eval = F}
+# A Stata file 
+worldBank <- read_dta("worldBank.dta")
+# SPSS
+worldBank <- read_sav("worldBank.sav")
+# Excel. Note that this command comes from the "readxl" package, not "haven"
+worldBank <- read_excel("worldBank.xlsx")
+```
+
+```{r, include=F}
+load("~/Dropbox/teaching/winter-2018/korbel-skills-workshops/intro-to-R/data/worldBank.Rdata")
+```
 
 
 --------------
 
 
 # Accessing Data
+Let's do some hands-on practice with the `worldBank` data. These tasks are a basic way to access 
 
 ## Data Structures
 
+```{r}
+class(worldBank)
+head(worldBank)
+```
+
 ## Vectors
+```{r}
+worldBank$country
+```
+
+```{r}
+worldBank$country[1]
+
+worldBank$country[1:10]
+```
 
 ## Data Frames
+```{r}
+worldBank[1,2]
 
-## Basic Operations 
+worldBank[1,]
+```
 
+## Boolean Operations
 
+```{r}
+# Reserve the equal sign
+1 == 1
+1 == 2
+T == F
+3 > 4
+4 > 3
+```
+
+```{r}
+subset(worldBank, country=="United States", year==2012)
+
+worldBank[1001:1005,]
+```
+
+There are better ways. dplyr later. 
+
+## Try it Out
+Ecuador's infant mortality in 2012
+
+<!--
 --------------  
-
-
-
-# Hands-On: NAVCO/IFs
-
-## Load Data
-
-## Extract Observation
-
-## Summary Statistics
-
-## Generate New Value
-
-## Plot
-
-
---------------  
-
 
 
 # Additional Skills 
@@ -228,3 +334,4 @@ With these packages installed, you can now use commands that are not part of "ba
 ## Visualization 
 
 ## Statistical Analysis
+-->
