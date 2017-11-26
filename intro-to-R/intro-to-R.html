@@ -12,7 +12,7 @@
 <meta name="author" content="Instructor – Jason Renn" />
 <meta name="author" content="Facilitators – Names" />
 
-<meta name="date" content="2017-11-25" />
+<meta name="date" content="2017-11-26" />
 
 <title>Introduction to Data Science Using R</title>
 
@@ -220,7 +220,7 @@ div.tocify {
 <h3 class="subtitle"><em>Korbel Skills Workshop</em></h3>
 <h4 class="author"><em>Instructor – Jason Renn</em></h4>
 <h4 class="author"><em>Facilitators – Names</em></h4>
-<h4 class="date"><em>November 25, 2017</em></h4>
+<h4 class="date"><em>November 26, 2017</em></h4>
 
 </div>
 
@@ -239,6 +239,15 @@ To add:
 -->
 <hr />
 <p><br></p>
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
 <div id="required-software" class="section level1">
 <h1>Required Software</h1>
 <p>Welcome to the first Korbel Skills Workshop<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. These materials are available online at the following url:</p>
@@ -403,707 +412,68 @@ worldBank &lt;- read_excel(&quot;worldBank.xlsx&quot;)</code></pre>
 </div>
 <div id="accessing-data" class="section level1">
 <h1>Accessing Data</h1>
-<p>Let’s do some hands-on practice with the <code>worldBank</code> data. These tasks are a basic way to access</p>
+<p>Now that you have a dataset loaded into <code>R</code>, let’s go over a few basics that will help you access the data.</p>
 <div id="data-structures" class="section level2">
 <h2>Data Structures</h2>
-<pre class="r"><code>class(worldBank)</code></pre>
+<p>Objects in the environment are of a certain type. For example, the <code>favoriteColor</code> value that you saved earlier is a set of letters. <code>R</code> saved this as a <code>character</code>. You can double-check this using the <code>class()</code> command. What kind of value is stored inside <code>yourAge</code>?</p>
+<pre class="r"><code>class(favoriteColor)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>class(yourAge)</code></pre>
+<p>Datasets are collections of values. Instead of returning a specific variable type when you use the <code>class()</code> command on a dataset, the command will return its structure.</p>
+<pre class="r"><code># the worldBank dataset is a &quot;data.frame.&quot; 
+# You can think of this type of data structure as something with columns and rows or two-dimensional objects.  
+class(worldBank)</code></pre>
 <pre><code>## [1] &quot;data.frame&quot;</code></pre>
-<pre class="r"><code>head(worldBank)</code></pre>
-<div class="kable-table">
-<table>
-<thead>
-<tr class="header">
-<th align="left">country</th>
-<th align="right">year</th>
-<th align="left">iso3c</th>
-<th align="right">greenhouseGasEmissions</th>
-<th align="right">infantMortality</th>
-<th align="right">homicideRate</th>
-<th align="right">militaryExpendituresPerGPD</th>
-<th align="right">netODAperCapita</th>
-<th align="right">gdpPerCapita</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Afghanistan</td>
-<td align="right">2011</td>
-<td align="left">AFG</td>
-<td align="right">17981.307</td>
-<td align="right">63.3</td>
-<td align="right">4.3</td>
-<td align="right">1.7785926</td>
-<td align="right">231.1469</td>
-<td align="right">603.5370</td>
-</tr>
-<tr class="even">
-<td align="left">Afghanistan</td>
-<td align="right">2012</td>
-<td align="left">AFG</td>
-<td align="right">NA</td>
-<td align="right">61.0</td>
-<td align="right">6.6</td>
-<td align="right">1.1447151</td>
-<td align="right">217.2212</td>
-<td align="right">669.0091</td>
-</tr>
-<tr class="odd">
-<td align="left">Afghanistan</td>
-<td align="right">2013</td>
-<td align="left">AFG</td>
-<td align="right">NA</td>
-<td align="right">58.8</td>
-<td align="right">NA</td>
-<td align="right">1.0614335</td>
-<td align="right">162.3784</td>
-<td align="right">631.7450</td>
-</tr>
-<tr class="even">
-<td align="left">Afghanistan</td>
-<td align="right">2014</td>
-<td align="left">AFG</td>
-<td align="right">NA</td>
-<td align="right">56.8</td>
-<td align="right">NA</td>
-<td align="right">1.3343567</td>
-<td align="right">150.9594</td>
-<td align="right">612.0697</td>
-</tr>
-<tr class="odd">
-<td align="left">Afghanistan</td>
-<td align="right">2015</td>
-<td align="left">AFG</td>
-<td align="right">NA</td>
-<td align="right">54.9</td>
-<td align="right">NA</td>
-<td align="right">0.9934538</td>
-<td align="right">125.6556</td>
-<td align="right">584.0259</td>
-</tr>
-<tr class="even">
-<td align="left">Albania</td>
-<td align="right">2011</td>
-<td align="left">ALB</td>
-<td align="right">8712.296</td>
-<td align="right">14.3</td>
-<td align="right">4.9</td>
-<td align="right">1.5282663</td>
-<td align="right">130.6212</td>
-<td align="right">4437.1781</td>
-</tr>
-</tbody>
-</table>
-</div>
+<p>If you look at the <code>worldBank</code> dataset, you’ll see that it’s a collection of many different types of values with values that are numeric and others that are characters. There are other variable types, but this is a useful, basic distinction.</p>
+<p>Try looking at the underlying <code>worldBank</code> dataset using any of the commands below.</p>
+<pre class="r"><code>head(worldBank)
+summary(worldBank)
+View(worldBank)</code></pre>
 </div>
 <div id="vectors" class="section level2">
 <h2>Vectors</h2>
-<pre class="r"><code>worldBank$country</code></pre>
-<pre><code>##    [1] &quot;Afghanistan&quot;                    &quot;Afghanistan&quot;                   
-##    [3] &quot;Afghanistan&quot;                    &quot;Afghanistan&quot;                   
-##    [5] &quot;Afghanistan&quot;                    &quot;Albania&quot;                       
-##    [7] &quot;Albania&quot;                        &quot;Albania&quot;                       
-##    [9] &quot;Albania&quot;                        &quot;Albania&quot;                       
-##   [11] &quot;Algeria&quot;                        &quot;Algeria&quot;                       
-##   [13] &quot;Algeria&quot;                        &quot;Algeria&quot;                       
-##   [15] &quot;Algeria&quot;                        &quot;American Samoa&quot;                
-##   [17] &quot;American Samoa&quot;                 &quot;American Samoa&quot;                
-##   [19] &quot;American Samoa&quot;                 &quot;American Samoa&quot;                
-##   [21] &quot;Andorra&quot;                        &quot;Andorra&quot;                       
-##   [23] &quot;Andorra&quot;                        &quot;Andorra&quot;                       
-##   [25] &quot;Andorra&quot;                        &quot;Angola&quot;                        
-##   [27] &quot;Angola&quot;                         &quot;Angola&quot;                        
-##   [29] &quot;Angola&quot;                         &quot;Angola&quot;                        
-##   [31] &quot;Antigua and Barbuda&quot;            &quot;Antigua and Barbuda&quot;           
-##   [33] &quot;Antigua and Barbuda&quot;            &quot;Antigua and Barbuda&quot;           
-##   [35] &quot;Antigua and Barbuda&quot;            &quot;Argentina&quot;                     
-##   [37] &quot;Argentina&quot;                      &quot;Argentina&quot;                     
-##   [39] &quot;Argentina&quot;                      &quot;Argentina&quot;                     
-##   [41] &quot;Armenia&quot;                        &quot;Armenia&quot;                       
-##   [43] &quot;Armenia&quot;                        &quot;Armenia&quot;                       
-##   [45] &quot;Armenia&quot;                        &quot;Aruba&quot;                         
-##   [47] &quot;Aruba&quot;                          &quot;Aruba&quot;                         
-##   [49] &quot;Aruba&quot;                          &quot;Aruba&quot;                         
-##   [51] &quot;Australia&quot;                      &quot;Australia&quot;                     
-##   [53] &quot;Australia&quot;                      &quot;Australia&quot;                     
-##   [55] &quot;Australia&quot;                      &quot;Austria&quot;                       
-##   [57] &quot;Austria&quot;                        &quot;Austria&quot;                       
-##   [59] &quot;Austria&quot;                        &quot;Austria&quot;                       
-##   [61] &quot;Azerbaijan&quot;                     &quot;Azerbaijan&quot;                    
-##   [63] &quot;Azerbaijan&quot;                     &quot;Azerbaijan&quot;                    
-##   [65] &quot;Azerbaijan&quot;                     &quot;Bahamas, The&quot;                  
-##   [67] &quot;Bahamas, The&quot;                   &quot;Bahamas, The&quot;                  
-##   [69] &quot;Bahamas, The&quot;                   &quot;Bahamas, The&quot;                  
-##   [71] &quot;Bahrain&quot;                        &quot;Bahrain&quot;                       
-##   [73] &quot;Bahrain&quot;                        &quot;Bahrain&quot;                       
-##   [75] &quot;Bahrain&quot;                        &quot;Bangladesh&quot;                    
-##   [77] &quot;Bangladesh&quot;                     &quot;Bangladesh&quot;                    
-##   [79] &quot;Bangladesh&quot;                     &quot;Bangladesh&quot;                    
-##   [81] &quot;Barbados&quot;                       &quot;Barbados&quot;                      
-##   [83] &quot;Barbados&quot;                       &quot;Barbados&quot;                      
-##   [85] &quot;Barbados&quot;                       &quot;Belarus&quot;                       
-##   [87] &quot;Belarus&quot;                        &quot;Belarus&quot;                       
-##   [89] &quot;Belarus&quot;                        &quot;Belarus&quot;                       
-##   [91] &quot;Belgium&quot;                        &quot;Belgium&quot;                       
-##   [93] &quot;Belgium&quot;                        &quot;Belgium&quot;                       
-##   [95] &quot;Belgium&quot;                        &quot;Belize&quot;                        
-##   [97] &quot;Belize&quot;                         &quot;Belize&quot;                        
-##   [99] &quot;Belize&quot;                         &quot;Belize&quot;                        
-##  [101] &quot;Benin&quot;                          &quot;Benin&quot;                         
-##  [103] &quot;Benin&quot;                          &quot;Benin&quot;                         
-##  [105] &quot;Benin&quot;                          &quot;Bermuda&quot;                       
-##  [107] &quot;Bermuda&quot;                        &quot;Bermuda&quot;                       
-##  [109] &quot;Bermuda&quot;                        &quot;Bermuda&quot;                       
-##  [111] &quot;Bhutan&quot;                         &quot;Bhutan&quot;                        
-##  [113] &quot;Bhutan&quot;                         &quot;Bhutan&quot;                        
-##  [115] &quot;Bhutan&quot;                         &quot;Bolivia&quot;                       
-##  [117] &quot;Bolivia&quot;                        &quot;Bolivia&quot;                       
-##  [119] &quot;Bolivia&quot;                        &quot;Bolivia&quot;                       
-##  [121] &quot;Bosnia and Herzegovina&quot;         &quot;Bosnia and Herzegovina&quot;        
-##  [123] &quot;Bosnia and Herzegovina&quot;         &quot;Bosnia and Herzegovina&quot;        
-##  [125] &quot;Bosnia and Herzegovina&quot;         &quot;Botswana&quot;                      
-##  [127] &quot;Botswana&quot;                       &quot;Botswana&quot;                      
-##  [129] &quot;Botswana&quot;                       &quot;Botswana&quot;                      
-##  [131] &quot;Brazil&quot;                         &quot;Brazil&quot;                        
-##  [133] &quot;Brazil&quot;                         &quot;Brazil&quot;                        
-##  [135] &quot;Brazil&quot;                         &quot;Brunei Darussalam&quot;             
-##  [137] &quot;Brunei Darussalam&quot;              &quot;Brunei Darussalam&quot;             
-##  [139] &quot;Brunei Darussalam&quot;              &quot;Brunei Darussalam&quot;             
-##  [141] &quot;Bulgaria&quot;                       &quot;Bulgaria&quot;                      
-##  [143] &quot;Bulgaria&quot;                       &quot;Bulgaria&quot;                      
-##  [145] &quot;Bulgaria&quot;                       &quot;Burkina Faso&quot;                  
-##  [147] &quot;Burkina Faso&quot;                   &quot;Burkina Faso&quot;                  
-##  [149] &quot;Burkina Faso&quot;                   &quot;Burkina Faso&quot;                  
-##  [151] &quot;Burundi&quot;                        &quot;Burundi&quot;                       
-##  [153] &quot;Burundi&quot;                        &quot;Burundi&quot;                       
-##  [155] &quot;Burundi&quot;                        &quot;Cambodia&quot;                      
-##  [157] &quot;Cambodia&quot;                       &quot;Cambodia&quot;                      
-##  [159] &quot;Cambodia&quot;                       &quot;Cambodia&quot;                      
-##  [161] &quot;Cameroon&quot;                       &quot;Cameroon&quot;                      
-##  [163] &quot;Cameroon&quot;                       &quot;Cameroon&quot;                      
-##  [165] &quot;Cameroon&quot;                       &quot;Canada&quot;                        
-##  [167] &quot;Canada&quot;                         &quot;Canada&quot;                        
-##  [169] &quot;Canada&quot;                         &quot;Canada&quot;                        
-##  [171] &quot;Cayman Islands&quot;                 &quot;Cayman Islands&quot;                
-##  [173] &quot;Cayman Islands&quot;                 &quot;Cayman Islands&quot;                
-##  [175] &quot;Cayman Islands&quot;                 &quot;Central African Republic&quot;      
-##  [177] &quot;Central African Republic&quot;       &quot;Central African Republic&quot;      
-##  [179] &quot;Central African Republic&quot;       &quot;Central African Republic&quot;      
-##  [181] &quot;Chad&quot;                           &quot;Chad&quot;                          
-##  [183] &quot;Chad&quot;                           &quot;Chad&quot;                          
-##  [185] &quot;Chad&quot;                           &quot;Channel Islands&quot;               
-##  [187] &quot;Channel Islands&quot;                &quot;Channel Islands&quot;               
-##  [189] &quot;Channel Islands&quot;                &quot;Channel Islands&quot;               
-##  [191] &quot;Chile&quot;                          &quot;Chile&quot;                         
-##  [193] &quot;Chile&quot;                          &quot;Chile&quot;                         
-##  [195] &quot;Chile&quot;                          &quot;China&quot;                         
-##  [197] &quot;China&quot;                          &quot;China&quot;                         
-##  [199] &quot;China&quot;                          &quot;China&quot;                         
-##  [201] &quot;Colombia&quot;                       &quot;Colombia&quot;                      
-##  [203] &quot;Colombia&quot;                       &quot;Colombia&quot;                      
-##  [205] &quot;Colombia&quot;                       &quot;Comoros&quot;                       
-##  [207] &quot;Comoros&quot;                        &quot;Comoros&quot;                       
-##  [209] &quot;Comoros&quot;                        &quot;Comoros&quot;                       
-##  [211] &quot;Congo, Dem. Rep.&quot;               &quot;Congo, Dem. Rep.&quot;              
-##  [213] &quot;Congo, Dem. Rep.&quot;               &quot;Congo, Dem. Rep.&quot;              
-##  [215] &quot;Congo, Dem. Rep.&quot;               &quot;Congo, Rep.&quot;                   
-##  [217] &quot;Congo, Rep.&quot;                    &quot;Congo, Rep.&quot;                   
-##  [219] &quot;Congo, Rep.&quot;                    &quot;Congo, Rep.&quot;                   
-##  [221] &quot;Costa Rica&quot;                     &quot;Costa Rica&quot;                    
-##  [223] &quot;Costa Rica&quot;                     &quot;Costa Rica&quot;                    
-##  [225] &quot;Costa Rica&quot;                     &quot;Cote d'Ivoire&quot;                 
-##  [227] &quot;Cote d'Ivoire&quot;                  &quot;Cote d'Ivoire&quot;                 
-##  [229] &quot;Cote d'Ivoire&quot;                  &quot;Cote d'Ivoire&quot;                 
-##  [231] &quot;Croatia&quot;                        &quot;Croatia&quot;                       
-##  [233] &quot;Croatia&quot;                        &quot;Croatia&quot;                       
-##  [235] &quot;Croatia&quot;                        &quot;Cuba&quot;                          
-##  [237] &quot;Cuba&quot;                           &quot;Cuba&quot;                          
-##  [239] &quot;Cuba&quot;                           &quot;Cuba&quot;                          
-##  [241] &quot;Curacao&quot;                        &quot;Curacao&quot;                       
-##  [243] &quot;Curacao&quot;                        &quot;Curacao&quot;                       
-##  [245] &quot;Curacao&quot;                        &quot;Cyprus&quot;                        
-##  [247] &quot;Cyprus&quot;                         &quot;Cyprus&quot;                        
-##  [249] &quot;Cyprus&quot;                         &quot;Cyprus&quot;                        
-##  [251] &quot;Czech Republic&quot;                 &quot;Czech Republic&quot;                
-##  [253] &quot;Czech Republic&quot;                 &quot;Czech Republic&quot;                
-##  [255] &quot;Czech Republic&quot;                 &quot;Denmark&quot;                       
-##  [257] &quot;Denmark&quot;                        &quot;Denmark&quot;                       
-##  [259] &quot;Denmark&quot;                        &quot;Denmark&quot;                       
-##  [261] &quot;Djibouti&quot;                       &quot;Djibouti&quot;                      
-##  [263] &quot;Djibouti&quot;                       &quot;Djibouti&quot;                      
-##  [265] &quot;Djibouti&quot;                       &quot;Dominica&quot;                      
-##  [267] &quot;Dominica&quot;                       &quot;Dominica&quot;                      
-##  [269] &quot;Dominica&quot;                       &quot;Dominica&quot;                      
-##  [271] &quot;Dominican Republic&quot;             &quot;Dominican Republic&quot;            
-##  [273] &quot;Dominican Republic&quot;             &quot;Dominican Republic&quot;            
-##  [275] &quot;Dominican Republic&quot;             &quot;Ecuador&quot;                       
-##  [277] &quot;Ecuador&quot;                        &quot;Ecuador&quot;                       
-##  [279] &quot;Ecuador&quot;                        &quot;Ecuador&quot;                       
-##  [281] &quot;Egypt, Arab Rep.&quot;               &quot;Egypt, Arab Rep.&quot;              
-##  [283] &quot;Egypt, Arab Rep.&quot;               &quot;Egypt, Arab Rep.&quot;              
-##  [285] &quot;Egypt, Arab Rep.&quot;               &quot;El Salvador&quot;                   
-##  [287] &quot;El Salvador&quot;                    &quot;El Salvador&quot;                   
-##  [289] &quot;El Salvador&quot;                    &quot;El Salvador&quot;                   
-##  [291] &quot;Equatorial Guinea&quot;              &quot;Equatorial Guinea&quot;             
-##  [293] &quot;Equatorial Guinea&quot;              &quot;Equatorial Guinea&quot;             
-##  [295] &quot;Equatorial Guinea&quot;              &quot;Eritrea&quot;                       
-##  [297] &quot;Eritrea&quot;                        &quot;Eritrea&quot;                       
-##  [299] &quot;Eritrea&quot;                        &quot;Eritrea&quot;                       
-##  [301] &quot;Estonia&quot;                        &quot;Estonia&quot;                       
-##  [303] &quot;Estonia&quot;                        &quot;Estonia&quot;                       
-##  [305] &quot;Estonia&quot;                        &quot;Ethiopia&quot;                      
-##  [307] &quot;Ethiopia&quot;                       &quot;Ethiopia&quot;                      
-##  [309] &quot;Ethiopia&quot;                       &quot;Ethiopia&quot;                      
-##  [311] &quot;Fiji&quot;                           &quot;Fiji&quot;                          
-##  [313] &quot;Fiji&quot;                           &quot;Fiji&quot;                          
-##  [315] &quot;Fiji&quot;                           &quot;Finland&quot;                       
-##  [317] &quot;Finland&quot;                        &quot;Finland&quot;                       
-##  [319] &quot;Finland&quot;                        &quot;Finland&quot;                       
-##  [321] &quot;France&quot;                         &quot;France&quot;                        
-##  [323] &quot;France&quot;                         &quot;France&quot;                        
-##  [325] &quot;France&quot;                         &quot;French Polynesia&quot;              
-##  [327] &quot;French Polynesia&quot;               &quot;French Polynesia&quot;              
-##  [329] &quot;French Polynesia&quot;               &quot;French Polynesia&quot;              
-##  [331] &quot;Gabon&quot;                          &quot;Gabon&quot;                         
-##  [333] &quot;Gabon&quot;                          &quot;Gabon&quot;                         
-##  [335] &quot;Gabon&quot;                          &quot;Gambia, The&quot;                   
-##  [337] &quot;Gambia, The&quot;                    &quot;Gambia, The&quot;                   
-##  [339] &quot;Gambia, The&quot;                    &quot;Gambia, The&quot;                   
-##  [341] &quot;Georgia&quot;                        &quot;Georgia&quot;                       
-##  [343] &quot;Georgia&quot;                        &quot;Georgia&quot;                       
-##  [345] &quot;Georgia&quot;                        &quot;Germany&quot;                       
-##  [347] &quot;Germany&quot;                        &quot;Germany&quot;                       
-##  [349] &quot;Germany&quot;                        &quot;Germany&quot;                       
-##  [351] &quot;Ghana&quot;                          &quot;Ghana&quot;                         
-##  [353] &quot;Ghana&quot;                          &quot;Ghana&quot;                         
-##  [355] &quot;Ghana&quot;                          &quot;Gibraltar&quot;                     
-##  [357] &quot;Gibraltar&quot;                      &quot;Gibraltar&quot;                     
-##  [359] &quot;Gibraltar&quot;                      &quot;Gibraltar&quot;                     
-##  [361] &quot;Greece&quot;                         &quot;Greece&quot;                        
-##  [363] &quot;Greece&quot;                         &quot;Greece&quot;                        
-##  [365] &quot;Greece&quot;                         &quot;Greenland&quot;                     
-##  [367] &quot;Greenland&quot;                      &quot;Greenland&quot;                     
-##  [369] &quot;Greenland&quot;                      &quot;Greenland&quot;                     
-##  [371] &quot;Grenada&quot;                        &quot;Grenada&quot;                       
-##  [373] &quot;Grenada&quot;                        &quot;Grenada&quot;                       
-##  [375] &quot;Grenada&quot;                        &quot;Guam&quot;                          
-##  [377] &quot;Guam&quot;                           &quot;Guam&quot;                          
-##  [379] &quot;Guam&quot;                           &quot;Guam&quot;                          
-##  [381] &quot;Guatemala&quot;                      &quot;Guatemala&quot;                     
-##  [383] &quot;Guatemala&quot;                      &quot;Guatemala&quot;                     
-##  [385] &quot;Guatemala&quot;                      &quot;Guinea&quot;                        
-##  [387] &quot;Guinea&quot;                         &quot;Guinea&quot;                        
-##  [389] &quot;Guinea&quot;                         &quot;Guinea&quot;                        
-##  [391] &quot;Guinea-Bissau&quot;                  &quot;Guinea-Bissau&quot;                 
-##  [393] &quot;Guinea-Bissau&quot;                  &quot;Guinea-Bissau&quot;                 
-##  [395] &quot;Guinea-Bissau&quot;                  &quot;Guyana&quot;                        
-##  [397] &quot;Guyana&quot;                         &quot;Guyana&quot;                        
-##  [399] &quot;Guyana&quot;                         &quot;Guyana&quot;                        
-##  [401] &quot;Haiti&quot;                          &quot;Haiti&quot;                         
-##  [403] &quot;Haiti&quot;                          &quot;Haiti&quot;                         
-##  [405] &quot;Haiti&quot;                          &quot;Honduras&quot;                      
-##  [407] &quot;Honduras&quot;                       &quot;Honduras&quot;                      
-##  [409] &quot;Honduras&quot;                       &quot;Honduras&quot;                      
-##  [411] &quot;Hong Kong SAR, China&quot;           &quot;Hong Kong SAR, China&quot;          
-##  [413] &quot;Hong Kong SAR, China&quot;           &quot;Hong Kong SAR, China&quot;          
-##  [415] &quot;Hong Kong SAR, China&quot;           &quot;Hungary&quot;                       
-##  [417] &quot;Hungary&quot;                        &quot;Hungary&quot;                       
-##  [419] &quot;Hungary&quot;                        &quot;Hungary&quot;                       
-##  [421] &quot;Iceland&quot;                        &quot;Iceland&quot;                       
-##  [423] &quot;Iceland&quot;                        &quot;Iceland&quot;                       
-##  [425] &quot;Iceland&quot;                        &quot;India&quot;                         
-##  [427] &quot;India&quot;                          &quot;India&quot;                         
-##  [429] &quot;India&quot;                          &quot;India&quot;                         
-##  [431] &quot;Indonesia&quot;                      &quot;Indonesia&quot;                     
-##  [433] &quot;Indonesia&quot;                      &quot;Indonesia&quot;                     
-##  [435] &quot;Indonesia&quot;                      &quot;Iran, Islamic Rep.&quot;            
-##  [437] &quot;Iran, Islamic Rep.&quot;             &quot;Iran, Islamic Rep.&quot;            
-##  [439] &quot;Iran, Islamic Rep.&quot;             &quot;Iran, Islamic Rep.&quot;            
-##  [441] &quot;Iraq&quot;                           &quot;Iraq&quot;                          
-##  [443] &quot;Iraq&quot;                           &quot;Iraq&quot;                          
-##  [445] &quot;Iraq&quot;                           &quot;Ireland&quot;                       
-##  [447] &quot;Ireland&quot;                        &quot;Ireland&quot;                       
-##  [449] &quot;Ireland&quot;                        &quot;Ireland&quot;                       
-##  [451] &quot;Isle of Man&quot;                    &quot;Isle of Man&quot;                   
-##  [453] &quot;Isle of Man&quot;                    &quot;Isle of Man&quot;                   
-##  [455] &quot;Isle of Man&quot;                    &quot;Israel&quot;                        
-##  [457] &quot;Israel&quot;                         &quot;Israel&quot;                        
-##  [459] &quot;Israel&quot;                         &quot;Israel&quot;                        
-##  [461] &quot;Italy&quot;                          &quot;Italy&quot;                         
-##  [463] &quot;Italy&quot;                          &quot;Italy&quot;                         
-##  [465] &quot;Italy&quot;                          &quot;Jamaica&quot;                       
-##  [467] &quot;Jamaica&quot;                        &quot;Jamaica&quot;                       
-##  [469] &quot;Jamaica&quot;                        &quot;Jamaica&quot;                       
-##  [471] &quot;Japan&quot;                          &quot;Japan&quot;                         
-##  [473] &quot;Japan&quot;                          &quot;Japan&quot;                         
-##  [475] &quot;Japan&quot;                          &quot;Jordan&quot;                        
-##  [477] &quot;Jordan&quot;                         &quot;Jordan&quot;                        
-##  [479] &quot;Jordan&quot;                         &quot;Jordan&quot;                        
-##  [481] &quot;Kazakhstan&quot;                     &quot;Kazakhstan&quot;                    
-##  [483] &quot;Kazakhstan&quot;                     &quot;Kazakhstan&quot;                    
-##  [485] &quot;Kazakhstan&quot;                     &quot;Kenya&quot;                         
-##  [487] &quot;Kenya&quot;                          &quot;Kenya&quot;                         
-##  [489] &quot;Kenya&quot;                          &quot;Kenya&quot;                         
-##  [491] &quot;Kiribati&quot;                       &quot;Kiribati&quot;                      
-##  [493] &quot;Kiribati&quot;                       &quot;Kiribati&quot;                      
-##  [495] &quot;Kiribati&quot;                       &quot;Korea, Rep.&quot;                   
-##  [497] &quot;Korea, Rep.&quot;                    &quot;Korea, Rep.&quot;                   
-##  [499] &quot;Korea, Rep.&quot;                    &quot;Korea, Rep.&quot;                   
-##  [501] &quot;Kuwait&quot;                         &quot;Kuwait&quot;                        
-##  [503] &quot;Kuwait&quot;                         &quot;Kuwait&quot;                        
-##  [505] &quot;Kuwait&quot;                         &quot;Kyrgyz Republic&quot;               
-##  [507] &quot;Kyrgyz Republic&quot;                &quot;Kyrgyz Republic&quot;               
-##  [509] &quot;Kyrgyz Republic&quot;                &quot;Kyrgyz Republic&quot;               
-##  [511] &quot;Lao PDR&quot;                        &quot;Lao PDR&quot;                       
-##  [513] &quot;Lao PDR&quot;                        &quot;Lao PDR&quot;                       
-##  [515] &quot;Lao PDR&quot;                        &quot;Latvia&quot;                        
-##  [517] &quot;Latvia&quot;                         &quot;Latvia&quot;                        
-##  [519] &quot;Latvia&quot;                         &quot;Latvia&quot;                        
-##  [521] &quot;Lebanon&quot;                        &quot;Lebanon&quot;                       
-##  [523] &quot;Lebanon&quot;                        &quot;Lebanon&quot;                       
-##  [525] &quot;Lebanon&quot;                        &quot;Lesotho&quot;                       
-##  [527] &quot;Lesotho&quot;                        &quot;Lesotho&quot;                       
-##  [529] &quot;Lesotho&quot;                        &quot;Lesotho&quot;                       
-##  [531] &quot;Liberia&quot;                        &quot;Liberia&quot;                       
-##  [533] &quot;Liberia&quot;                        &quot;Liberia&quot;                       
-##  [535] &quot;Liberia&quot;                        &quot;Libya&quot;                         
-##  [537] &quot;Libya&quot;                          &quot;Libya&quot;                         
-##  [539] &quot;Libya&quot;                          &quot;Libya&quot;                         
-##  [541] &quot;Liechtenstein&quot;                  &quot;Liechtenstein&quot;                 
-##  [543] &quot;Liechtenstein&quot;                  &quot;Liechtenstein&quot;                 
-##  [545] &quot;Liechtenstein&quot;                  &quot;Lithuania&quot;                     
-##  [547] &quot;Lithuania&quot;                      &quot;Lithuania&quot;                     
-##  [549] &quot;Lithuania&quot;                      &quot;Lithuania&quot;                     
-##  [551] &quot;Luxembourg&quot;                     &quot;Luxembourg&quot;                    
-##  [553] &quot;Luxembourg&quot;                     &quot;Luxembourg&quot;                    
-##  [555] &quot;Luxembourg&quot;                     &quot;Macao SAR, China&quot;              
-##  [557] &quot;Macao SAR, China&quot;               &quot;Macao SAR, China&quot;              
-##  [559] &quot;Macao SAR, China&quot;               &quot;Macao SAR, China&quot;              
-##  [561] &quot;Macedonia, FYR&quot;                 &quot;Macedonia, FYR&quot;                
-##  [563] &quot;Macedonia, FYR&quot;                 &quot;Macedonia, FYR&quot;                
-##  [565] &quot;Macedonia, FYR&quot;                 &quot;Madagascar&quot;                    
-##  [567] &quot;Madagascar&quot;                     &quot;Madagascar&quot;                    
-##  [569] &quot;Madagascar&quot;                     &quot;Madagascar&quot;                    
-##  [571] &quot;Malawi&quot;                         &quot;Malawi&quot;                        
-##  [573] &quot;Malawi&quot;                         &quot;Malawi&quot;                        
-##  [575] &quot;Malawi&quot;                         &quot;Malaysia&quot;                      
-##  [577] &quot;Malaysia&quot;                       &quot;Malaysia&quot;                      
-##  [579] &quot;Malaysia&quot;                       &quot;Malaysia&quot;                      
-##  [581] &quot;Maldives&quot;                       &quot;Maldives&quot;                      
-##  [583] &quot;Maldives&quot;                       &quot;Maldives&quot;                      
-##  [585] &quot;Maldives&quot;                       &quot;Mali&quot;                          
-##  [587] &quot;Mali&quot;                           &quot;Mali&quot;                          
-##  [589] &quot;Mali&quot;                           &quot;Mali&quot;                          
-##  [591] &quot;Malta&quot;                          &quot;Malta&quot;                         
-##  [593] &quot;Malta&quot;                          &quot;Malta&quot;                         
-##  [595] &quot;Malta&quot;                          &quot;Marshall Islands&quot;              
-##  [597] &quot;Marshall Islands&quot;               &quot;Marshall Islands&quot;              
-##  [599] &quot;Marshall Islands&quot;               &quot;Marshall Islands&quot;              
-##  [601] &quot;Mauritania&quot;                     &quot;Mauritania&quot;                    
-##  [603] &quot;Mauritania&quot;                     &quot;Mauritania&quot;                    
-##  [605] &quot;Mauritania&quot;                     &quot;Mauritius&quot;                     
-##  [607] &quot;Mauritius&quot;                      &quot;Mauritius&quot;                     
-##  [609] &quot;Mauritius&quot;                      &quot;Mauritius&quot;                     
-##  [611] &quot;Mexico&quot;                         &quot;Mexico&quot;                        
-##  [613] &quot;Mexico&quot;                         &quot;Mexico&quot;                        
-##  [615] &quot;Mexico&quot;                         &quot;Micronesia, Fed. Sts.&quot;         
-##  [617] &quot;Micronesia, Fed. Sts.&quot;          &quot;Micronesia, Fed. Sts.&quot;         
-##  [619] &quot;Micronesia, Fed. Sts.&quot;          &quot;Micronesia, Fed. Sts.&quot;         
-##  [621] &quot;Moldova&quot;                        &quot;Moldova&quot;                       
-##  [623] &quot;Moldova&quot;                        &quot;Moldova&quot;                       
-##  [625] &quot;Moldova&quot;                        &quot;Monaco&quot;                        
-##  [627] &quot;Monaco&quot;                         &quot;Monaco&quot;                        
-##  [629] &quot;Monaco&quot;                         &quot;Monaco&quot;                        
-##  [631] &quot;Mongolia&quot;                       &quot;Mongolia&quot;                      
-##  [633] &quot;Mongolia&quot;                       &quot;Mongolia&quot;                      
-##  [635] &quot;Mongolia&quot;                       &quot;Montenegro&quot;                    
-##  [637] &quot;Montenegro&quot;                     &quot;Montenegro&quot;                    
-##  [639] &quot;Montenegro&quot;                     &quot;Montenegro&quot;                    
-##  [641] &quot;Morocco&quot;                        &quot;Morocco&quot;                       
-##  [643] &quot;Morocco&quot;                        &quot;Morocco&quot;                       
-##  [645] &quot;Morocco&quot;                        &quot;Mozambique&quot;                    
-##  [647] &quot;Mozambique&quot;                     &quot;Mozambique&quot;                    
-##  [649] &quot;Mozambique&quot;                     &quot;Mozambique&quot;                    
-##  [651] &quot;Myanmar&quot;                        &quot;Myanmar&quot;                       
-##  [653] &quot;Myanmar&quot;                        &quot;Myanmar&quot;                       
-##  [655] &quot;Myanmar&quot;                        &quot;Namibia&quot;                       
-##  [657] &quot;Namibia&quot;                        &quot;Namibia&quot;                       
-##  [659] &quot;Namibia&quot;                        &quot;Namibia&quot;                       
-##  [661] &quot;Nepal&quot;                          &quot;Nepal&quot;                         
-##  [663] &quot;Nepal&quot;                          &quot;Nepal&quot;                         
-##  [665] &quot;Nepal&quot;                          &quot;Netherlands&quot;                   
-##  [667] &quot;Netherlands&quot;                    &quot;Netherlands&quot;                   
-##  [669] &quot;Netherlands&quot;                    &quot;Netherlands&quot;                   
-##  [671] &quot;New Caledonia&quot;                  &quot;New Caledonia&quot;                 
-##  [673] &quot;New Caledonia&quot;                  &quot;New Caledonia&quot;                 
-##  [675] &quot;New Caledonia&quot;                  &quot;New Zealand&quot;                   
-##  [677] &quot;New Zealand&quot;                    &quot;New Zealand&quot;                   
-##  [679] &quot;New Zealand&quot;                    &quot;New Zealand&quot;                   
-##  [681] &quot;Nicaragua&quot;                      &quot;Nicaragua&quot;                     
-##  [683] &quot;Nicaragua&quot;                      &quot;Nicaragua&quot;                     
-##  [685] &quot;Nicaragua&quot;                      &quot;Niger&quot;                         
-##  [687] &quot;Niger&quot;                          &quot;Niger&quot;                         
-##  [689] &quot;Niger&quot;                          &quot;Niger&quot;                         
-##  [691] &quot;Nigeria&quot;                        &quot;Nigeria&quot;                       
-##  [693] &quot;Nigeria&quot;                        &quot;Nigeria&quot;                       
-##  [695] &quot;Nigeria&quot;                        &quot;Northern Mariana Islands&quot;      
-##  [697] &quot;Northern Mariana Islands&quot;       &quot;Northern Mariana Islands&quot;      
-##  [699] &quot;Northern Mariana Islands&quot;       &quot;Northern Mariana Islands&quot;      
-##  [701] &quot;Norway&quot;                         &quot;Norway&quot;                        
-##  [703] &quot;Norway&quot;                         &quot;Norway&quot;                        
-##  [705] &quot;Norway&quot;                         &quot;Oman&quot;                          
-##  [707] &quot;Oman&quot;                           &quot;Oman&quot;                          
-##  [709] &quot;Oman&quot;                           &quot;Oman&quot;                          
-##  [711] &quot;Pakistan&quot;                       &quot;Pakistan&quot;                      
-##  [713] &quot;Pakistan&quot;                       &quot;Pakistan&quot;                      
-##  [715] &quot;Pakistan&quot;                       &quot;Palau&quot;                         
-##  [717] &quot;Palau&quot;                          &quot;Palau&quot;                         
-##  [719] &quot;Palau&quot;                          &quot;Palau&quot;                         
-##  [721] &quot;Panama&quot;                         &quot;Panama&quot;                        
-##  [723] &quot;Panama&quot;                         &quot;Panama&quot;                        
-##  [725] &quot;Panama&quot;                         &quot;Papua New Guinea&quot;              
-##  [727] &quot;Papua New Guinea&quot;               &quot;Papua New Guinea&quot;              
-##  [729] &quot;Papua New Guinea&quot;               &quot;Papua New Guinea&quot;              
-##  [731] &quot;Paraguay&quot;                       &quot;Paraguay&quot;                      
-##  [733] &quot;Paraguay&quot;                       &quot;Paraguay&quot;                      
-##  [735] &quot;Paraguay&quot;                       &quot;Peru&quot;                          
-##  [737] &quot;Peru&quot;                           &quot;Peru&quot;                          
-##  [739] &quot;Peru&quot;                           &quot;Peru&quot;                          
-##  [741] &quot;Philippines&quot;                    &quot;Philippines&quot;                   
-##  [743] &quot;Philippines&quot;                    &quot;Philippines&quot;                   
-##  [745] &quot;Philippines&quot;                    &quot;Poland&quot;                        
-##  [747] &quot;Poland&quot;                         &quot;Poland&quot;                        
-##  [749] &quot;Poland&quot;                         &quot;Poland&quot;                        
-##  [751] &quot;Portugal&quot;                       &quot;Portugal&quot;                      
-##  [753] &quot;Portugal&quot;                       &quot;Portugal&quot;                      
-##  [755] &quot;Portugal&quot;                       &quot;Puerto Rico&quot;                   
-##  [757] &quot;Puerto Rico&quot;                    &quot;Puerto Rico&quot;                   
-##  [759] &quot;Puerto Rico&quot;                    &quot;Puerto Rico&quot;                   
-##  [761] &quot;Qatar&quot;                          &quot;Qatar&quot;                         
-##  [763] &quot;Qatar&quot;                          &quot;Qatar&quot;                         
-##  [765] &quot;Qatar&quot;                          &quot;Romania&quot;                       
-##  [767] &quot;Romania&quot;                        &quot;Romania&quot;                       
-##  [769] &quot;Romania&quot;                        &quot;Romania&quot;                       
-##  [771] &quot;Russian Federation&quot;             &quot;Russian Federation&quot;            
-##  [773] &quot;Russian Federation&quot;             &quot;Russian Federation&quot;            
-##  [775] &quot;Russian Federation&quot;             &quot;Rwanda&quot;                        
-##  [777] &quot;Rwanda&quot;                         &quot;Rwanda&quot;                        
-##  [779] &quot;Rwanda&quot;                         &quot;Rwanda&quot;                        
-##  [781] &quot;Samoa&quot;                          &quot;Samoa&quot;                         
-##  [783] &quot;Samoa&quot;                          &quot;Samoa&quot;                         
-##  [785] &quot;Samoa&quot;                          &quot;San Marino&quot;                    
-##  [787] &quot;San Marino&quot;                     &quot;San Marino&quot;                    
-##  [789] &quot;San Marino&quot;                     &quot;San Marino&quot;                    
-##  [791] &quot;Sao Tome and Principe&quot;          &quot;Sao Tome and Principe&quot;         
-##  [793] &quot;Sao Tome and Principe&quot;          &quot;Sao Tome and Principe&quot;         
-##  [795] &quot;Sao Tome and Principe&quot;          &quot;Saudi Arabia&quot;                  
-##  [797] &quot;Saudi Arabia&quot;                   &quot;Saudi Arabia&quot;                  
-##  [799] &quot;Saudi Arabia&quot;                   &quot;Saudi Arabia&quot;                  
-##  [801] &quot;Senegal&quot;                        &quot;Senegal&quot;                       
-##  [803] &quot;Senegal&quot;                        &quot;Senegal&quot;                       
-##  [805] &quot;Senegal&quot;                        &quot;Serbia&quot;                        
-##  [807] &quot;Serbia&quot;                         &quot;Serbia&quot;                        
-##  [809] &quot;Serbia&quot;                         &quot;Serbia&quot;                        
-##  [811] &quot;Seychelles&quot;                     &quot;Seychelles&quot;                    
-##  [813] &quot;Seychelles&quot;                     &quot;Seychelles&quot;                    
-##  [815] &quot;Seychelles&quot;                     &quot;Sierra Leone&quot;                  
-##  [817] &quot;Sierra Leone&quot;                   &quot;Sierra Leone&quot;                  
-##  [819] &quot;Sierra Leone&quot;                   &quot;Sierra Leone&quot;                  
-##  [821] &quot;Singapore&quot;                      &quot;Singapore&quot;                     
-##  [823] &quot;Singapore&quot;                      &quot;Singapore&quot;                     
-##  [825] &quot;Singapore&quot;                      &quot;Sint Maarten (Dutch part)&quot;     
-##  [827] &quot;Sint Maarten (Dutch part)&quot;      &quot;Sint Maarten (Dutch part)&quot;     
-##  [829] &quot;Sint Maarten (Dutch part)&quot;      &quot;Sint Maarten (Dutch part)&quot;     
-##  [831] &quot;Slovak Republic&quot;                &quot;Slovak Republic&quot;               
-##  [833] &quot;Slovak Republic&quot;                &quot;Slovak Republic&quot;               
-##  [835] &quot;Slovak Republic&quot;                &quot;Slovenia&quot;                      
-##  [837] &quot;Slovenia&quot;                       &quot;Slovenia&quot;                      
-##  [839] &quot;Slovenia&quot;                       &quot;Slovenia&quot;                      
-##  [841] &quot;Solomon Islands&quot;                &quot;Solomon Islands&quot;               
-##  [843] &quot;Solomon Islands&quot;                &quot;Solomon Islands&quot;               
-##  [845] &quot;Solomon Islands&quot;                &quot;Somalia&quot;                       
-##  [847] &quot;Somalia&quot;                        &quot;Somalia&quot;                       
-##  [849] &quot;Somalia&quot;                        &quot;Somalia&quot;                       
-##  [851] &quot;South Africa&quot;                   &quot;South Africa&quot;                  
-##  [853] &quot;South Africa&quot;                   &quot;South Africa&quot;                  
-##  [855] &quot;South Africa&quot;                   &quot;South Sudan&quot;                   
-##  [857] &quot;South Sudan&quot;                    &quot;South Sudan&quot;                   
-##  [859] &quot;South Sudan&quot;                    &quot;South Sudan&quot;                   
-##  [861] &quot;Spain&quot;                          &quot;Spain&quot;                         
-##  [863] &quot;Spain&quot;                          &quot;Spain&quot;                         
-##  [865] &quot;Spain&quot;                          &quot;Sri Lanka&quot;                     
-##  [867] &quot;Sri Lanka&quot;                      &quot;Sri Lanka&quot;                     
-##  [869] &quot;Sri Lanka&quot;                      &quot;Sri Lanka&quot;                     
-##  [871] &quot;St. Kitts and Nevis&quot;            &quot;St. Kitts and Nevis&quot;           
-##  [873] &quot;St. Kitts and Nevis&quot;            &quot;St. Kitts and Nevis&quot;           
-##  [875] &quot;St. Kitts and Nevis&quot;            &quot;St. Lucia&quot;                     
-##  [877] &quot;St. Lucia&quot;                      &quot;St. Lucia&quot;                     
-##  [879] &quot;St. Lucia&quot;                      &quot;St. Lucia&quot;                     
-##  [881] &quot;St. Martin (French part)&quot;       &quot;St. Martin (French part)&quot;      
-##  [883] &quot;St. Martin (French part)&quot;       &quot;St. Martin (French part)&quot;      
-##  [885] &quot;St. Martin (French part)&quot;       &quot;St. Vincent and the Grenadines&quot;
-##  [887] &quot;St. Vincent and the Grenadines&quot; &quot;St. Vincent and the Grenadines&quot;
-##  [889] &quot;St. Vincent and the Grenadines&quot; &quot;St. Vincent and the Grenadines&quot;
-##  [891] &quot;Sudan&quot;                          &quot;Sudan&quot;                         
-##  [893] &quot;Sudan&quot;                          &quot;Sudan&quot;                         
-##  [895] &quot;Sudan&quot;                          &quot;Suriname&quot;                      
-##  [897] &quot;Suriname&quot;                       &quot;Suriname&quot;                      
-##  [899] &quot;Suriname&quot;                       &quot;Suriname&quot;                      
-##  [901] &quot;Swaziland&quot;                      &quot;Swaziland&quot;                     
-##  [903] &quot;Swaziland&quot;                      &quot;Swaziland&quot;                     
-##  [905] &quot;Swaziland&quot;                      &quot;Sweden&quot;                        
-##  [907] &quot;Sweden&quot;                         &quot;Sweden&quot;                        
-##  [909] &quot;Sweden&quot;                         &quot;Sweden&quot;                        
-##  [911] &quot;Switzerland&quot;                    &quot;Switzerland&quot;                   
-##  [913] &quot;Switzerland&quot;                    &quot;Switzerland&quot;                   
-##  [915] &quot;Switzerland&quot;                    &quot;Syrian Arab Republic&quot;          
-##  [917] &quot;Syrian Arab Republic&quot;           &quot;Syrian Arab Republic&quot;          
-##  [919] &quot;Syrian Arab Republic&quot;           &quot;Syrian Arab Republic&quot;          
-##  [921] &quot;Tajikistan&quot;                     &quot;Tajikistan&quot;                    
-##  [923] &quot;Tajikistan&quot;                     &quot;Tajikistan&quot;                    
-##  [925] &quot;Tajikistan&quot;                     &quot;Tanzania&quot;                      
-##  [927] &quot;Tanzania&quot;                       &quot;Tanzania&quot;                      
-##  [929] &quot;Tanzania&quot;                       &quot;Tanzania&quot;                      
-##  [931] &quot;Thailand&quot;                       &quot;Thailand&quot;                      
-##  [933] &quot;Thailand&quot;                       &quot;Thailand&quot;                      
-##  [935] &quot;Thailand&quot;                       &quot;Timor-Leste&quot;                   
-##  [937] &quot;Timor-Leste&quot;                    &quot;Timor-Leste&quot;                   
-##  [939] &quot;Timor-Leste&quot;                    &quot;Timor-Leste&quot;                   
-##  [941] &quot;Togo&quot;                           &quot;Togo&quot;                          
-##  [943] &quot;Togo&quot;                           &quot;Togo&quot;                          
-##  [945] &quot;Togo&quot;                           &quot;Tonga&quot;                         
-##  [947] &quot;Tonga&quot;                          &quot;Tonga&quot;                         
-##  [949] &quot;Tonga&quot;                          &quot;Tonga&quot;                         
-##  [951] &quot;Trinidad and Tobago&quot;            &quot;Trinidad and Tobago&quot;           
-##  [953] &quot;Trinidad and Tobago&quot;            &quot;Trinidad and Tobago&quot;           
-##  [955] &quot;Trinidad and Tobago&quot;            &quot;Tunisia&quot;                       
-##  [957] &quot;Tunisia&quot;                        &quot;Tunisia&quot;                       
-##  [959] &quot;Tunisia&quot;                        &quot;Tunisia&quot;                       
-##  [961] &quot;Turkey&quot;                         &quot;Turkey&quot;                        
-##  [963] &quot;Turkey&quot;                         &quot;Turkey&quot;                        
-##  [965] &quot;Turkey&quot;                         &quot;Turkmenistan&quot;                  
-##  [967] &quot;Turkmenistan&quot;                   &quot;Turkmenistan&quot;                  
-##  [969] &quot;Turkmenistan&quot;                   &quot;Turkmenistan&quot;                  
-##  [971] &quot;Turks and Caicos Islands&quot;       &quot;Turks and Caicos Islands&quot;      
-##  [973] &quot;Turks and Caicos Islands&quot;       &quot;Turks and Caicos Islands&quot;      
-##  [975] &quot;Turks and Caicos Islands&quot;       &quot;Tuvalu&quot;                        
-##  [977] &quot;Tuvalu&quot;                         &quot;Tuvalu&quot;                        
-##  [979] &quot;Tuvalu&quot;                         &quot;Tuvalu&quot;                        
-##  [981] &quot;Uganda&quot;                         &quot;Uganda&quot;                        
-##  [983] &quot;Uganda&quot;                         &quot;Uganda&quot;                        
-##  [985] &quot;Uganda&quot;                         &quot;Ukraine&quot;                       
-##  [987] &quot;Ukraine&quot;                        &quot;Ukraine&quot;                       
-##  [989] &quot;Ukraine&quot;                        &quot;Ukraine&quot;                       
-##  [991] &quot;United Arab Emirates&quot;           &quot;United Arab Emirates&quot;          
-##  [993] &quot;United Arab Emirates&quot;           &quot;United Arab Emirates&quot;          
-##  [995] &quot;United Arab Emirates&quot;           &quot;United Kingdom&quot;                
-##  [997] &quot;United Kingdom&quot;                 &quot;United Kingdom&quot;                
-##  [999] &quot;United Kingdom&quot;                 &quot;United Kingdom&quot;                
-## [1001] &quot;United States&quot;                  &quot;United States&quot;                 
-## [1003] &quot;United States&quot;                  &quot;United States&quot;                 
-## [1005] &quot;United States&quot;                  &quot;Uruguay&quot;                       
-## [1007] &quot;Uruguay&quot;                        &quot;Uruguay&quot;                       
-## [1009] &quot;Uruguay&quot;                        &quot;Uruguay&quot;                       
-## [1011] &quot;Uzbekistan&quot;                     &quot;Uzbekistan&quot;                    
-## [1013] &quot;Uzbekistan&quot;                     &quot;Uzbekistan&quot;                    
-## [1015] &quot;Uzbekistan&quot;                     &quot;Vanuatu&quot;                       
-## [1017] &quot;Vanuatu&quot;                        &quot;Vanuatu&quot;                       
-## [1019] &quot;Vanuatu&quot;                        &quot;Vanuatu&quot;                       
-## [1021] &quot;Venezuela, RB&quot;                  &quot;Venezuela, RB&quot;                 
-## [1023] &quot;Venezuela, RB&quot;                  &quot;Venezuela, RB&quot;                 
-## [1025] &quot;Venezuela, RB&quot;                  &quot;Vietnam&quot;                       
-## [1027] &quot;Vietnam&quot;                        &quot;Vietnam&quot;                       
-## [1029] &quot;Vietnam&quot;                        &quot;Vietnam&quot;                       
-## [1031] &quot;Virgin Islands (U.S.)&quot;          &quot;Virgin Islands (U.S.)&quot;         
-## [1033] &quot;Virgin Islands (U.S.)&quot;          &quot;Virgin Islands (U.S.)&quot;         
-## [1035] &quot;Virgin Islands (U.S.)&quot;          &quot;West Bank and Gaza&quot;            
-## [1037] &quot;West Bank and Gaza&quot;             &quot;West Bank and Gaza&quot;            
-## [1039] &quot;West Bank and Gaza&quot;             &quot;West Bank and Gaza&quot;            
-## [1041] &quot;Yemen, Rep.&quot;                    &quot;Yemen, Rep.&quot;                   
-## [1043] &quot;Yemen, Rep.&quot;                    &quot;Yemen, Rep.&quot;                   
-## [1045] &quot;Yemen, Rep.&quot;                    &quot;Zambia&quot;                        
-## [1047] &quot;Zambia&quot;                         &quot;Zambia&quot;                        
-## [1049] &quot;Zambia&quot;                         &quot;Zambia&quot;                        
-## [1051] &quot;Zimbabwe&quot;                       &quot;Zimbabwe&quot;                      
-## [1053] &quot;Zimbabwe&quot;                       &quot;Zimbabwe&quot;                      
-## [1055] &quot;Zimbabwe&quot;</code></pre>
+<p>Each of the columns inside of the <code>worldBank</code> dataset is a vector. Others will refer to a vector as an array. A vector is a one-dimensional object. You can also think about it as a list of values. We’ll make a small vector here.</p>
+<pre class="r"><code>myVector &lt;- c(&quot;look&quot;, &quot;over&quot;, &quot;here&quot;)</code></pre>
+<p>This a vector that has three values in it. Of course you know this because you can see the code that generated the vector. However, if you didn’t make the vector yourself you could check the length with the <code>length()</code> command.</p>
+<pre class="r"><code>length(myVector)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<p>You could access individual values in the array by stating the index or the position for a particular value. For example, if we wanted the first value in the <code>myVector</code> array, we would type the following.</p>
+<pre class="r"><code>myVector[1]</code></pre>
+<pre><code>## [1] &quot;look&quot;</code></pre>
+<p>How would we use this within a dataset? Remember that our <code>worldBank</code> dataset is a two-dimensional object, but each column is just a vector. If you want to know what value is in a particular row, you can simply type the index or even a range of indicies. Try the following.</p>
 <pre class="r"><code>worldBank$country[1]</code></pre>
 <pre><code>## [1] &quot;Afghanistan&quot;</code></pre>
 <pre class="r"><code>worldBank$country[1:10]</code></pre>
-<pre><code>##  [1] &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot;
-##  [6] &quot;Albania&quot;     &quot;Albania&quot;     &quot;Albania&quot;     &quot;Albania&quot;     &quot;Albania&quot;</code></pre>
+<pre><code>##  [1] &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Afghanistan&quot; &quot;Albania&quot;     &quot;Albania&quot;     &quot;Albania&quot;     &quot;Albania&quot;     &quot;Albania&quot;</code></pre>
 </div>
 <div id="data-frames" class="section level2">
 <h2>Data Frames</h2>
+<p>You can refer to an individual column in a data.frame by its name using the syntax in the example above or simply by its position. Think of this like a game of battleship. You can call out a specific position within a data.frame by typing out two numbers: the row and the column.</p>
 <pre class="r"><code>worldBank[1,2]</code></pre>
-<pre><code>## [1] 2011</code></pre>
-<pre class="r"><code>worldBank[1,]</code></pre>
-<div class="kable-table">
-<table>
-<thead>
-<tr class="header">
-<th align="left">country</th>
-<th align="right">year</th>
-<th align="left">iso3c</th>
-<th align="right">greenhouseGasEmissions</th>
-<th align="right">infantMortality</th>
-<th align="right">homicideRate</th>
-<th align="right">militaryExpendituresPerGPD</th>
-<th align="right">netODAperCapita</th>
-<th align="right">gdpPerCapita</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Afghanistan</td>
-<td align="right">2011</td>
-<td align="left">AFG</td>
-<td align="right">17981.31</td>
-<td align="right">63.3</td>
-<td align="right">4.3</td>
-<td align="right">1.778593</td>
-<td align="right">231.1469</td>
-<td align="right">603.537</td>
-</tr>
-</tbody>
-</table>
-</div>
+<p>You can also look at the entire row or column by leaving on of the values blank. Try the following.</p>
+<pre class="r"><code>worldBank[,1]
+worldBank[3,]</code></pre>
 </div>
 <div id="boolean-operations" class="section level2">
 <h2>Boolean Operations</h2>
-<pre class="r"><code># Reserve the equal sign
-1 == 1</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>1 == 2</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<pre class="r"><code>T == F</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<pre class="r"><code>3 &gt; 4</code></pre>
-<pre><code>## [1] FALSE</code></pre>
-<pre class="r"><code>4 &gt; 3</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code>subset(worldBank, country==&quot;United States&quot;, year==2012)</code></pre>
-<div class="kable-table">
-<table>
-<tbody>
-<tr class="odd">
-<td align="left">1001</td>
-</tr>
-<tr class="even">
-<td align="left">1002</td>
-</tr>
-<tr class="odd">
-<td align="left">1003</td>
-</tr>
-<tr class="even">
-<td align="left">1004</td>
-</tr>
-<tr class="odd">
-<td align="left">1005</td>
-</tr>
-</tbody>
-</table>
-</div>
-<pre class="r"><code>worldBank[1001:1005,]</code></pre>
+<p>You can ask <code>R</code> to evaluate boolean or TRUE/FALSE statements by using the following syntax.</p>
+<pre class="r"><code># &quot;==&quot; Asks whether something is exactly equivalent. 
+# The double equals is sometimes confusing. That's why we usually use &quot;&lt;-&quot; to assign values and avoid the single &quot;=&quot;. 
+1 == 1
+x == 1
+T == F
+&quot;bob&quot; == &quot;Bob&quot;
+
+# You can also do greater and less than. Of course this only makes sense for numerical values. 
+3 &gt; 4
+3 &lt; 4
+
+# Are both statements true? Use the '&amp;' or AND command.
+T &amp; F
+1 &lt; 2 &amp; 2 &lt; 3</code></pre>
+<p>There are many other operators and commands that return TRUE and FALSE. These basic boolean operations are useful in isolating values within a dataset that meet certain requirements. Consider the following command which returns</p>
+<pre class="r"><code># The United State's values for 2012
+subset(worldBank, country==&quot;United States&quot; &amp; year==2012)</code></pre>
 <div class="kable-table">
 <table>
 <thead>
@@ -1122,29 +492,39 @@ worldBank &lt;- read_excel(&quot;worldBank.xlsx&quot;)</code></pre>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1001</td>
-<td align="left">United States</td>
-<td align="right">2011</td>
-<td align="left">USA</td>
-<td align="right">6571654</td>
-<td align="right">6.1</td>
-<td align="right">4.7</td>
-<td align="right">4.583976</td>
-<td align="right">NA</td>
-<td align="right">49790.67</td>
-</tr>
-<tr class="even">
 <td>1002</td>
 <td align="left">United States</td>
 <td align="right">2012</td>
 <td align="left">USA</td>
 <td align="right">6343841</td>
-<td align="right">6.0</td>
+<td align="right">6</td>
 <td align="right">4.7</td>
 <td align="right">4.238745</td>
 <td align="right">NA</td>
 <td align="right">51450.12</td>
 </tr>
+</tbody>
+</table>
+</div>
+<pre class="r"><code># The US in any year after 2012
+subset(worldBank, country==&quot;United States&quot; &amp; year&gt;2012)</code></pre>
+<div class="kable-table">
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th align="left">country</th>
+<th align="right">year</th>
+<th align="left">iso3c</th>
+<th align="right">greenhouseGasEmissions</th>
+<th align="right">infantMortality</th>
+<th align="right">homicideRate</th>
+<th align="right">militaryExpendituresPerGPD</th>
+<th align="right">netODAperCapita</th>
+<th align="right">gdpPerCapita</th>
+</tr>
+</thead>
+<tbody>
 <tr class="odd">
 <td>1003</td>
 <td align="left">United States</td>
@@ -1184,27 +564,25 @@ worldBank &lt;- read_excel(&quot;worldBank.xlsx&quot;)</code></pre>
 </tbody>
 </table>
 </div>
-<p>There are better ways. dplyr later.</p>
 </div>
 <div id="try-it-out" class="section level2">
 <h2>Try it Out</h2>
-<p>Ecuador’s infant mortality in 2012</p>
-<hr />
-</div>
-</div>
-<div id="additional-skills" class="section level1">
-<h1>Additional Skills</h1>
-<div id="descriptive-statistics" class="section level2">
-<h2>Descriptive Statistics</h2>
-</div>
-<div id="data-management" class="section level2">
-<h2>Data Management</h2>
-</div>
-<div id="visualization" class="section level2">
-<h2>Visualization</h2>
-</div>
-<div id="statistical-analysis" class="section level2">
-<h2>Statistical Analysis</h2>
+<p>Use the example above to find Ecuador’s infant mortality in 2012.</p>
+<p>This workshop was an introduction to basic functions of the <code>R</code> statistical programming language. More training is available that will allow you to work with data and produce summaray statistics, visualizations, statistical models, and merge datasets. For more information and resources, talk with one of the facilitors before you leave. You can email me at <a href="mailto:duu.renn@du.edu">duu.renn@du.edu</a>.</p>
+<!--
+--------------  
+
+
+# Additional Skills 
+
+## Descriptive Statistics
+
+## Data Management
+
+## Visualization 
+
+## Statistical Analysis
+-->
 </div>
 </div>
 <div class="footnotes">

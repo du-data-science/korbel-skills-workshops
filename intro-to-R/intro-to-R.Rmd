@@ -8,7 +8,6 @@ date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output:
   html_document:
     collapsed: yes
-    df_print: kable
     fontsize: 20pt
     highlight: textmate
     smooth_scroll: yes
@@ -36,11 +35,25 @@ To add:
 
 <br>
 
+
+<style>
+pre {
+  overflow-x: auto;
+}
+pre code {
+  word-wrap: normal;
+  white-space: pre;
+}
+</style>
+
 ```{r setup, include=F, cache=F}
+options(width = 999)
+
 knitr::opts_chunk$set(cache = T, # Things run faster... the second time. Reset if changes do not compile
                       include = T, eval = T, echo = T, # By default, code chunks are visible, executes, output hidden
                       message = F, warning = F, # If it's broke, we don't want to see it
-                      dev = 'png', fig.path = "images/", fig.width = 6, fig.height = 4, fig.align = 'center') # image and figure options
+                      dev = 'png', fig.path = "images/", fig.width = 6, fig.height = 4, fig.align = 'center', # image and figure options
+                      tidy=F, size="large")
 
 ## Packages. Add packrat features here
 require(RefManageR)
@@ -272,19 +285,58 @@ load("~/Dropbox/teaching/winter-2018/korbel-skills-workshops/intro-to-R/data/wor
 
 
 # Accessing Data
-Let's do some hands-on practice with the `worldBank` data. These tasks are a basic way to access 
+Now that you have a dataset loaded into `R`, let's go over a few basics that will help you access the data.  
 
 ## Data Structures
+Objects in the environment are of a certain type. For example, the `favoriteColor` value that you saved earlier is a set of letters. `R` saved this as a `character`. You can double-check this using the `class()` command. What kind of value is stored inside `yourAge`?
 
 ```{r}
+class(favoriteColor)
+```
+
+```{r, eval = F}
+class(yourAge)
+```
+
+
+Datasets are collections of values. Instead of returning a specific variable type when you use the `class()` command on a dataset, the command will return its structure.  
+
+```{r}
+# the worldBank dataset is a "data.frame." 
+# You can think of this type of data structure as something with columns and rows or two-dimensional objects.  
 class(worldBank)
+```
+
+If you look at the `worldBank` dataset, you'll see that it's a collection of many different types of values with values that are numeric and others that are characters. There are other variable types, but this is a useful, basic distinction.  
+
+Try looking at the underlying `worldBank` dataset using any of the commands below.  
+
+```{r, eval = F}
 head(worldBank)
+summary(worldBank)
+View(worldBank)
 ```
 
 ## Vectors
+Each of the columns inside of the `worldBank` dataset is a vector. Others will refer to a vector as an array. A vector is a one-dimensional object. You can also think about it as a list of values. We'll make a small vector here.  
+
 ```{r}
-worldBank$country
+myVector <- c("look", "over", "here")
 ```
+
+This a vector that has three values in it. Of course you know this because you can see the code that generated the vector. However, if you didn't make the vector yourself you could check the length with the `length()` command.  
+
+```{r}
+length(myVector)
+```
+
+You could access individual values in the array by stating the index or the position for a particular value. For example, if we wanted the first value in the `myVector` array, we would type the following.  
+
+```{r}
+myVector[1]
+```
+
+How would we use this within a dataset? Remember that our `worldBank` dataset is a two-dimensional object, but each column is just a vector. If you want to know what value is in a particular row, you can simply type the index or even a range of indicies. Try the following.  
 
 ```{r}
 worldBank$country[1]
@@ -293,33 +345,57 @@ worldBank$country[1:10]
 ```
 
 ## Data Frames
-```{r}
-worldBank[1,2]
+You can refer to an individual column in a data.frame by its name using the syntax in the example above or simply by its position. Think of this like a game of battleship. You can call out a specific position within a data.frame by typing out two numbers: the row and the column.  
 
-worldBank[1,]
+```{r, eval = F}
+worldBank[1,2]
+```
+
+You can also look at the entire row or column by leaving on of the values blank. Try the following.  
+
+```{r, eval = F}
+worldBank[,1]
+worldBank[3,]
 ```
 
 ## Boolean Operations
+You can ask `R` to evaluate boolean or TRUE/FALSE statements by using the following syntax. 
 
-```{r}
-# Reserve the equal sign
+```{r, eval=F}
+# "==" Asks whether something is exactly equivalent. 
+# The double equals is sometimes confusing. That's why we usually use "<-" to assign values and avoid the single "=". 
 1 == 1
-1 == 2
+x == 1
 T == F
+"bob" == "Bob"
+
+# You can also do greater and less than. Of course this only makes sense for numerical values. 
 3 > 4
-4 > 3
+3 < 4
+
+# Are both statements true? Use the '&' or AND command.
+T & F
+1 < 2 & 2 < 3
 ```
+
+There are many other operators and commands that return TRUE and FALSE. These basic boolean operations are useful in isolating values within a dataset that meet certain requirements. Consider the following command which returns 
 
 ```{r}
-subset(worldBank, country=="United States", year==2012)
+# The United State's values for 2012
+subset(worldBank, country=="United States" & year==2012)
 
-worldBank[1001:1005,]
+# The US in any year after 2012
+subset(worldBank, country=="United States" & year>2012)
 ```
-
-There are better ways. dplyr later. 
 
 ## Try it Out
-Ecuador's infant mortality in 2012
+Use the example above to find Ecuador's infant mortality in 2012.  
+
+```{r}
+
+```
+
+This workshop was an introduction to basic functions of the `R` statistical programming language. More training is available that will allow you to work with data and produce summaray statistics, visualizations, statistical models, and merge datasets. For more information and resources, talk with one of the facilitors before you leave. You can email me at <duu.renn@du.edu>.
 
 <!--
 --------------  
