@@ -1,21 +1,20 @@
 ---
-title: "Introduction to Data Science Using R"
-author: "Jason Renn"
+title: 'Introduction to Data Science Using R'
+subtitle: "Korbel Skills Workshop"
+author: 
+- Instructor -- Jason Renn
+- Facilitators -- Names
+date: '`r format(Sys.Date(), "%B %d, %Y")`'
 output:
   html_document:
-    toc: yes
     collapsed: yes
     fontsize: 20pt
     highlight: textmate
-    number_sections: yes
     smooth_scroll: yes
     theme: spacelab
-    toc_depth: 2
-    toc_float: yes
-  pdf_document:
-    number_sections: yes
     toc: yes
     toc_depth: 2
+    toc_float: yes
 ---
 
 <!--
@@ -64,11 +63,9 @@ require(knitr)
 
 
 # Required Software
-Welcome to the first Korbel Skills Workshop.^[All workshop materials are covered under a GPL 3.0 license. If you'd like more experience with the tools covered here, consult the instructors.] These materials are available online at the following url:  
+Welcome to the first Korbel Skills Workshop^[All workshop materials are covered under a GPL 3.0 license. If you'd like more experience with the tools covered here, consult the instructors.]. These materials are available online at the following url:  
 
-> [Github Repository](https://github.com/du-data-science/korbel-skills-workshops/tree/master/intro-to-R)  
-
-> http://bit.ly/2p7PYAg
+> https://du-data-science.github.io/korbel-skills-workshops/ (http://bit.ly/2hI2bYk)
 
 You will need to install the following software for this workshop. Please install both (in order) in the next several minutes as we begin with a brief introduction of Data Science and the R statistical programming language.^[If you would like to setup your computer for future workshops, consider installing a TeX Distribution, either [MiKTeX for Windows](https://miktex.org/download) or [MacTeX for Mac](https://www.tug.org/mactex/). If you're on a Linux, some distributions include [TeX Live](https://www.tug.org/texlive/quickinstall.html) but you should make sure to update. You can also install [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) for version control and create an account on [github](https://github.com/join). If you use your du.edu email address, you'll qualify for a free student account.]  
 
@@ -202,29 +199,11 @@ require(haven)
 library(readxl)
 ```
 
-You can open saved files on your computer or load data straight from the internet. Let's try this with two common IR datasets, the Polity Index and the UCDP/PRIO Armed Conflict Dataset.  
-
-- [Polity Dataset Website](http://www.systemicpeace.org/inscrdata.html)
-
-- [Political Terror Score Website](http://www.politicalterrorscale.org/Data/Download.html)
-
-```{r, eval = F}
-# Save and load through file menu
-library(readxl)
-polity <- read_excel("~/Downloads/p4v2016.xls")
-View(p4v2016)
-
-# Straight from the website
-pts <- read.csv("http://www.politicalterrorscale.org/Data/Files/PTS-2017.csv")
-```
-
 For this example, we will use a dataset provided by the World Bank. This is a small dataset with only a little more than one thousand observations. You could use a spreadsheet program like Excel to open up and edit the data. For larger files, with tens-of-thousands, or even millions of observations are much easier to work with in `R` or similar programs.  
 
-We will load this file from the World Bank's website using an R package called `WDI`. This will allow us to do some basic data management before importing everything as well. We'll then export the data into a number of different formats so that you can view it in your desired program or even .  
+You can find these data files online at:  
 
-You can find these data files online in the repository's `data` folder:  
-
-> [Data Folder](https://github.com/du-data-science/korbel-skills-workshops/tree/master/intro-to-R/data)
+> (website -- link to data file)
 
 ```{r, eval = F, include = F}
 require(WDI)
@@ -234,7 +213,6 @@ worldBank <- WDI(country = "all",
                  indicator = c("EN.ATM.GHGT.KT.CE", "SP.DYN.IMRT.IN", "VC.IHR.PSRC.P5", "MS.MIL.XPND.GD.ZS", "DT.ODA.ODAT.PC.ZS", "NY.GDP.PCAP.CD"),
     start = 2011, end = 2015, extra = T, cache = NULL)
 
-# Rename columns and remove regional values -- for readability. More on dplyr in a later workshop. 
 worldBank <- worldBank %>% 
   filter(region!="Aggregates") %>% 
   select(country, year, iso3c, greenhouseGasEmissions = EN.ATM.GHGT.KT.CE, infantMortality = SP.DYN.IMRT.IN, homicideRate = VC.IHR.PSRC.P5, militaryExpendituresPerGPD = MS.MIL.XPND.GD.ZS, netODAperCapita = DT.ODA.ODAT.PC.ZS, gdpPerCapita = NY.GDP.PCAP.CD) %>% 
@@ -319,6 +297,7 @@ class(favoriteColor)
 ```{r, eval = F}
 class(yourAge)
 ```
+
 
 Datasets are collections of values. Instead of returning a specific variable type when you use the `class()` command on a dataset, the command will return its structure.  
 
@@ -416,26 +395,7 @@ Use the example above to find Ecuador's infant mortality in 2012.
 
 ```
 
-# Next Steps
-This workshop was an introduction to basic functions of the `R` statistical programming language. More training is available that will allow you to work with data and produce summaray statistics, visualizations, statistical models, and merge datasets. For more information and resources, talk with one of the facilitors before you leave. You can email me at <duu.renn@du.edu>.  
-
-If we have time, I'm happy to answer questions and get ideas for future workshops. Some cool links below:  
-
-- [Shiny Apps](https://shiny.rstudio.com/gallery/) 
-- [Mapping Data with ggplot](https://www.r-graph-gallery.com/map/)
-- [Mapping Data with leaflet](https://rstudio.github.io/leaflet/)
-- [Basic Visualization with ggplot](http://www.cookbook-r.com/Graphs/)
-- [Text Mining with R](https://www.tidytextmining.com/)
-- [Web Scrapping with Rvest](https://www.analyticsvidhya.com/blog/2017/03/beginners-guide-on-web-scraping-in-r-using-rvest-with-hands-on-knowledge/)
-- [Web Scrapping with R Selenium](https://cran.r-project.org/web/packages/RSelenium/vignettes/RSelenium-basics.html)
-- [Regression - OLS](https://www.r-bloggers.com/ordinary-least-squares-ols-linear-regression-in-r/)
-- [Regression - GLM](https://www.statmethods.net/advstats/glm.html)
-- [Free R Book from those with Econ Backgrounds](http://www-bcf.usc.edu/~gareth/ISL/)
-- [Free R book for those with no programing and limited math background](http://r4ds.had.co.nz/)
-- [Swirl Package](http://swirlstats.com/)
-- [Reproducible Documents](http://kbroman.org/datacarpentry_R_2016-06-01/05-rmarkdown.html)
-- [Where to look for answers (and ask questions)](https://stackoverflow.com/questions/tagged/r)
-
+This workshop was an introduction to basic functions of the `R` statistical programming language. More training is available that will allow you to work with data and produce summaray statistics, visualizations, statistical models, and merge datasets. For more information and resources, talk with one of the facilitors before you leave. You can email me at <duu.renn@du.edu>.
 
 <!--
 --------------  
